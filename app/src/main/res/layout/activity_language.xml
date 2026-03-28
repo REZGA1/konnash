@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF"
+    android:padding="32dp">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:contentDescription="Logo"/>
+
+    <Button
+        android:id="@+id/btnTurkish"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="Turkish"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:backgroundTint="#FFFFFF"
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1dp"
+        android:cornerRadius="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnEnglish"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="English"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:backgroundTint="#FFFFFF"
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1dp"
+        android:cornerRadius="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnFrancais"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="Français"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:backgroundTint="#FFFFFF"
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1dp"
+        android:cornerRadius="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnArabe"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="العربية"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:backgroundTint="#FFFFFF"
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="1dp"
+        android:cornerRadius="12dp"
+        android:layout_marginBottom="16dp"/>
+
+</LinearLayout>
