@@ -8,4 +8,14 @@
     <string name="lang_english">English</string>
     <string name="lang_french">Français</string>
     <string name="lang_arabic">العربية</string>
+
+    <!-- Phone Number Screen -->
+    <string name="phone_number_title">المرجو إدخال رقم الهاتف</string>
+    <string name="phone_number_hint">رقم الهاتف</string>
+    <string name="phone_number_prefix">+213</string>
+    <string name="phone_number_desc">يسمح لك رقم الهاتف بالولوج بأمان إلى حسابك الخاص من أي هاتف و من أي مكان.</string>
+    <string name="btn_continue">مواصلة</string>
+    <string name="footer_text">بالنقر على متابعة، فإنك تقر بأنك قد قرأت و قبلت ما يلي من \n %1$s و %2$s</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_use">شروط الاستعمال</string>
 </resources>

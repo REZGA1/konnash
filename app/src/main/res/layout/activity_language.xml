@@ -28,7 +28,6 @@
         android:backgroundTint="#FFFFFF"
         android:strokeColor="#BBDEFB"
         android:strokeWidth="1dp"
-        android:cornerRadius="12dp"
         android:layout_marginBottom="16dp"/>
 
     <Button
@@ -42,7 +41,6 @@
         android:backgroundTint="#FFFFFF"
         android:strokeColor="#BBDEFB"
         android:strokeWidth="1dp"
-        android:cornerRadius="12dp"
         android:layout_marginBottom="16dp"/>
 
     <Button
@@ -56,11 +54,10 @@
         android:backgroundTint="#FFFFFF"
         android:strokeColor="#BBDEFB"
         android:strokeWidth="1dp"
-        android:cornerRadius="12dp"
         android:layout_marginBottom="16dp"/>
 
     <Button
-        android:id="@+id/btnArabe"
+        android:id="@+id/btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -69,8 +66,7 @@
         android:textSize="18sp"
         android:backgroundTint="#FFFFFF"
         android:strokeColor="#BBDEFB"
-        android:strokeWidth="1dp"
-        android:cornerRadius="12dp"
+        android:strokeWidth="1"
         android:layout_marginBottom="16dp"/>
 
 </LinearLayout>
