@@ -7,7 +7,6 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -30,7 +29,6 @@ class PhoneNumberActivity : AppCompatActivity() {
 
         val spannableString = SpannableString(fullText)
 
-        // Find positions of links
         val privacyStart = fullText.indexOf(privacyPolicy)
         val termsStart = fullText.indexOf(termsOfUse)
 

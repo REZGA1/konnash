@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Konnash">
         <activity
-            android:name=".MainActivity"
+            android:name=".OtpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,12 @@
         </activity>
         <activity
             android:name=".PhoneNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LanguageActivity"
             android:exported="false" />
     </application>
 

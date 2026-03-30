@@ -2,8 +2,20 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Konnash" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.Konnash" parent="Base.Theme.Konnash" />
+
+    <style name="OtpBoxStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/otp_box_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textColor">@color/blue_primary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
