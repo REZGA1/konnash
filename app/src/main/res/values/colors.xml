@@ -4,5 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <!-- Couleurs de l'app -->
     <color name="blue_primary">#2196F3</color>
+    <color name="blue_secondary">#03A9F4</color>
+    <color name="blue_light">#E3F2FD</color>
     <color name="blue_border">#BBDEFB</color>
+    <color name="bg_gray">#F8F9FA</color>
+    <color name="text_gray">#757575</color>
+    <color name="green_amount">#4CAF50</color>
+    <color name="red_amount">#F44336</color>
 </resources>
