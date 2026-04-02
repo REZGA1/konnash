@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    "Complete Your Information" Screen
+    Designed with significant side margins to prevent UI elements from touching the screen corners.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp">
+
+    <!-- Scrollable container for form fields to ensure accessibility on all screen sizes -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnValidate"
+        android:layout_marginBottom="20dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Page Title: "Veuillez compléter vos informations" with top margin -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="@string/complete_info_title"
+                android:textColor="#3498DB"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Input Label: Small blue uppercase text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="@string/label_point_of_sale"
+                android:textColor="#3498DB"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05" />
+
+            <!-- Point of Sale Input field with minimalist design (no border) -->
+            <EditText
+                android:id="@+id/etPointOfSale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@null"
+                android:hint="@string/hint_point_of_sale"
+                android:inputType="textPersonName"
+                android:paddingBottom="12dp"
+                android:textColor="#333333"
+                android:textColorHint="#CCCCCC"
+                android:textSize="18sp"
+                android:autofillHints="name" />
+
+            <!-- Decorative Underline separator -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!--
+        VALIDER Button:
+        Aligned to bottom. Horizontal spacing is managed by the parent's 40dp padding.
+    -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnValidate"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#3498DB"
+        android:text="@string/btn_validate"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

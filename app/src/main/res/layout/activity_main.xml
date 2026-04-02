@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Language Selection Screen
+    This layout stacks the logo and buttons vertically.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="70dp"
+    android:paddingRight="70dp"
+    android:paddingTop="80dp">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- App Logo: sized and spaced to match the provided design -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/app_logo_description"
+        android:src="@drawable/ic_language_logo" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button2_text"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+    <!--
+        Language Buttons:
+        - Width matches the available space inside the 70dp padding.
+        - Style 'LanguageButtonStyle' handles height, corners, and text color.
+    -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTurkish"
+        style="@style/LanguageButtonStyle"
+        android:text="@string/lang_turkish" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button3_text"
-        app:layout_constraintTop_toBottomOf="@id/button2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEnglish"
+        style="@style/LanguageButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="@string/lang_english" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFrench"
+        style="@style/LanguageButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="@string/lang_french" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnArabic"
+        style="@style/LanguageButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="@string/lang_arabic" />
+
+</LinearLayout>
