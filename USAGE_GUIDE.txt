@@ -1,0 +1,289 @@
+FILE STRUCTURE AND USAGE GUIDE
+==============================
+
+I. MODEL LAYER
+==============
+
+1. UserProfile.java
+   Purpose: Represents the single store owner
+   Fields:
+   - id: int (always 1, single user)
+   - storeName: String (store name)
+   - phone: int (phone number - no country code)
+   - countryCode: String ("+213", "+212", etc.)
+   - activityType: String (business type)
+   - sector: String (business sector)
+   - initialBalance: double (starting balance)
+   - openDate: String (session start date)
+
+   Usage: Data storage for user profile
+
+2. Transaction.java
+   Purpose: Individual income/expense transaction
+   Fields:
+   - id: int
+   - type: String (TYPE_INCOME or TYPE_EXPENSE)
+   - amount: double
+   - category: String (e.g., "Food", "Rent")
+   - description: String
+   - date: String
+   - archiveId: int (0=current, >0=archived)
+
+   Usage: Each transaction record
+
+3. Balance.java
+   Purpose: Calculate current financial status
+   Fields:
+   - initialBalance: double
+   - totalIncome: double
+   - totalExpense: double
+
+   Methods:
+   - getCurrentBalance(): returns initialBalance + income - expense
+
+   Usage: Get current balance snapshot
+
+4. Archive.java
+   Purpose: Store closed session summary
+   Fields:
+   - id: int
+   - totalBalance: double (balance at close)
+   - totalIncome: double
+   - totalExpense: double
+   - openDate: String
+   - closeDate: String
+
+   Usage: Historical session data
+
+5. Report.java
+   Purpose: Financial report for period
+   Fields:
+   - balance: double
+   - income: double
+   - expense: double
+   - fromDate, toDate: String
+   - details: List<Transaction>
+
+   Usage: Generate period reports
+
+
+II. DATABASE LAYER
+==================
+
+1. DatabaseHelper.java
+   Purpose: SQLite database management
+   Tables Created:
+
+   a) user_profile
+      - id (PRIMARY KEY)
+      - store_name
+      - phone (INTEGER)
+      - country_code
+      - activity_type
+      - sector
+      - initial_balance
+      - open_date
+
+   b) transactions
+      - id (AUTOINCREMENT)
+      - type
+      - amount
+      - category
+      - description
+      - date
+      - archive_id (0=current)
+
+   c) archives
+      - id (AUTOINCREMENT)
+      - total_balance
+      - total_income
+      - total_expense
+      - open_date
+      - close_date
+
+   Usage: Create/upgrade database
+
+2. TransactionDAO.java
+   Purpose: Transaction data access operations
+
+   Methods:
+   - insertTransaction(Transaction): Add new transaction
+   - deleteTransaction(int): Remove transaction
+   - archiveCurrentTransactions(int): Move to archive
+   - getCurrentTransactions(): Get active transactions
+   - getTransactionsByArchive(int): Get archived transactions
+   - getTransactionsByDateRange(from, to): Filter by date
+   - getSumByTypeAndArchive(type, archiveId): Sum calculation
+   - getSumByTypeAndDate(type, from, to): Sum by period
+
+   Usage: All transaction database operations
+
+3. ArchiveDAO.java
+   Purpose: Archive data access operations
+
+   Methods:
+   - insertArchive(Archive): Create new archive
+   - getAllArchives(): Get all closed sessions
+   - getArchiveById(int): Get specific archive
+
+   Usage: Archive management
+
+
+III. BUSINESS LOGIC LAYER
+=========================
+
+1. ProfileManager.java (NEW)
+   Purpose: Manage single user profile
+
+   Features:
+   - PROFILE_ID = 1 (constant, single user)
+   - Only one profile exists in database
+
+   Methods:
+   - initializeProfile(...): First time setup
+   - getUserProfile(): Get user data
+   - updateProfile(name, type, sector): Update editable fields
+   - updateInitialBalance(amount): Change balance
+   - resetAfterClose(newDate): Reset after session close
+   - getInitialBalance(): Get current balance
+   - getOpenDate(): Get session open date
+   - profileExists(): Check if profile exists
+
+   Usage: Handle all user profile operations
+
+2. FinanceManager.java
+   Purpose: Financial transaction management
+
+   Methods:
+   - addIncome(amount, category, desc, date): Add income
+   - addExpense(amount, category, desc, date): Add expense
+   - removeTransaction(id): Delete transaction
+   - closeSession(date): End session, archive data
+   - getCurrentBalance(): Get Balance object
+   - getCurrentTransactions(): Get active transactions
+   - getArchiveDetails(archiveId): Get archive transactions
+   - getAllArchives(): Get all archives
+
+   Usage: Main finance operations
+
+3. ReportManager.java
+   Purpose: Generate financial reports
+
+   Methods:
+   - getReport(from, to): Period report
+   - getTodayReport(date): Today's report
+
+   Usage: Generate reports
+
+4. Validator.java (UPDATED)
+   Purpose: Input validation
+
+   Methods:
+   - validateProfile(name, phone, code, type, sector)
+     Checks:
+     * storeName not empty
+     * phone > 0 (integer value)
+     * countryCode not empty
+     * activityType not empty
+     * sector not empty
+
+   - validateTransaction(amount, category, desc)
+     Checks:
+     * amount > 0
+     * category not empty
+     * description not empty
+
+   - validateInitialBalance(amount)
+     Checks:
+     * Valid number
+
+   Usage: Validate all user inputs
+
+
+IV. DATA FLOW
+=============
+
+ADDING INCOME:
+1. MainActivity -> FinanceManager.addIncome()
+2. Validator.validateTransaction() checks input
+3. Create Transaction object with TYPE_INCOME
+4. TransactionDAO.insertTransaction() saves to DB
+5. Success message returned
+
+CLOSING SESSION:
+1. MainActivity -> FinanceManager.closeSession()
+2. Get sums: income, expense
+3. Calculate final balance
+4. Create Archive with totals
+5. ArchiveDAO.insertArchive() saves archive
+6. TransactionDAO.archiveCurrentTransactions() moves records
+7. ProfileManager.resetAfterClose() prepares for next session
+
+GENERATING REPORT:
+1. MainActivity -> ReportManager.getReport(from, to)
+2. TransactionDAO gets sum by type and date
+3. Calculate balance
+4. Get transaction details
+5. Return Report object
+
+
+V. NOTES FOR ANDROID STUDIO
+============================
+
+If you see "Cannot resolve symbol" errors:
+1. Click: Build > Rebuild Project
+2. Wait for indexing to complete
+3. Errors will clear
+
+If you see "never used" warnings:
+This is NORMAL for library/DAO classes.
+They are used by MainActivity (not shown).
+
+To integrate with MainActivity:
+```java
+// In MainActivity.java
+import com.example.konnash.Business_Logic.*;
+import com.example.konnash.Model.*;
+
+// Create managers
+ProfileManager profileMgr = new ProfileManager(this);
+FinanceManager financeMgr = new FinanceManager(this);
+ReportManager reportMgr = new ReportManager(this);
+
+// Add income
+financeMgr.addIncome("500", "Sales", "Product A", "2024-04-02");
+
+// Get balance
+Balance balance = financeMgr.getCurrentBalance();
+
+// Generate report
+Report report = reportMgr.getReport("2024-04-01", "2024-04-02");
+```
+
+VI. PHONE NUMBER HANDLING
+==========================
+
+Old: phone stored as TEXT
+New: phone stored as INTEGER
+
+Example:
+- User enters: 987654321
+- CountryCode: "+213"
+- Display: +213 987654321
+- Database: 987654321 (int) + 213 (string)
+
+This separation allows:
+- Flexible country codes
+- Clean integer storage
+- Proper phone formatting
+
+
+VI. SIMPLE & CLEAN
+==================
+
+No complex patterns
+No advanced frameworks
+Just: Model -> DAO -> Business Logic -> UI
+
+Perfect for offline single-user app.
+
