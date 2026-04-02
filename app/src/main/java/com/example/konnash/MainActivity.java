@@ -16,8 +16,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         
-        // Start with the main Dashboard (Clients Tab)
-        showCarnetCredit();
+        // Start with the Language Selection screen (activity_main)
+        showLanguageSelection();
+    }
+
+    // --- Onboarding Screens ---
+
+    private void showLanguageSelection() {
+        setContentView(R.layout.activity_main);
+        applyWindowInsets(findViewById(R.id.main));
+
+        View btnValider = findViewById(R.id.btnValiderLanguage);
+
+        // Language buttons listener - show the Valider button on click
+        View.OnClickListener langClickListener = v -> {
+            if (btnValider != null) btnValider.setVisibility(View.VISIBLE);
+        };
+
+        findViewById(R.id.btnTurkish).setOnClickListener(langClickListener);
+        findViewById(R.id.btnEnglish).setOnClickListener(langClickListener);
+        findViewById(R.id.btnFrench).setOnClickListener(langClickListener);
+        findViewById(R.id.btnArabic).setOnClickListener(langClickListener);
+
+        if (btnValider != null) {
+            btnValider.setOnClickListener(v -> showCompleteInfo());
+        }
+    }
+
+    private void showCompleteInfo() {
+        setContentView(R.layout.activity_complete_info);
+        applyWindowInsets(findViewById(R.id.main));
+
+        View btnValider = findViewById(R.id.btnValidate);
+        if (btnValider != null) {
+            // When clicked, go to the Carnet Caisse dashboard
+            btnValider.setOnClickListener(v -> showCarnetCaisse());
+        }
     }
 
     // --- Main Dashboard Screens ---
@@ -61,34 +95,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil);
         applyWindowInsets(findViewById(R.id.main_root));
         setupBottomNav();
-    }
-
-    // --- Entree / Sortie Screens ---
-
-    private void showEntree() {
-        setContentView(R.layout.activity_entree);
-        applyWindowInsets(findViewById(R.id.main_root));
-
-        // Back Arrow returns to Caisse Dashboard
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
-
-        // Valider returns to Caisse Dashboard
-        View btnValider = findViewById(R.id.btnValider);
-        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
-    }
-
-    private void showSortie() {
-        setContentView(R.layout.activity_sortie);
-        applyWindowInsets(findViewById(R.id.main_root));
-
-        // Back Arrow returns to Caisse Dashboard
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
-
-        // Valider returns to Caisse Dashboard
-        View btnValider = findViewById(R.id.btnValider);
-        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
     }
 
     // --- Sub-Screens / Form Screens ---
@@ -160,6 +166,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void showEntree() {
+        setContentView(R.layout.activity_entree);
+        applyWindowInsets(findViewById(R.id.main_root));
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
+
+        View btnValider = findViewById(R.id.btnValider);
+        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
+    }
+
+    private void showSortie() {
+        setContentView(R.layout.activity_sortie);
+        applyWindowInsets(findViewById(R.id.main_root));
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
+
+        View btnValider = findViewById(R.id.btnValider);
+        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
+    }
+
     // --- Shared UI Logic Helpers ---
 
     private void setupDashboardTabs() {
@@ -174,8 +202,11 @@ public class MainActivity extends AppCompatActivity {
         View nav = findViewById(R.id.bottom_navigation);
         if (nav instanceof LinearLayout) {
             LinearLayout navLayout = (LinearLayout) nav;
+            // Nav Item 1: Carnet Credit
             navLayout.getChildAt(0).setOnClickListener(v -> showCarnetCredit());
+            // Nav Item 2: Carnet Caisse
             navLayout.getChildAt(1).setOnClickListener(v -> showCarnetCaisse());
+            // Nav Item 3: Profil
             navLayout.getChildAt(2).setOnClickListener(v -> showProfil());
         }
     }

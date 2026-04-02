@@ -1,56 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Language Selection Screen
-    This layout stacks the logo and buttons vertically.
+    Updated: Added a VALIDER button that appears after selecting a language.
 -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingLeft="70dp"
-    android:paddingRight="70dp"
-    android:paddingTop="80dp">
+    android:background="#FFFFFF">
 
-    <!-- App Logo: sized and spaced to match the provided design -->
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="80dp"
-        android:contentDescription="@string/app_logo_description"
-        android:src="@drawable/ic_language_logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:paddingTop="80dp">
 
-    <!--
-        Language Buttons:
-        - Width matches the available space inside the 70dp padding.
-        - Style 'LanguageButtonStyle' handles height, corners, and text color.
-    -->
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="80dp"
+            android:contentDescription="@string/app_logo_description"
+            android:src="@drawable/ic_language_logo" />
+
+        <!-- Language Buttons -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTurkish"
+            style="@style/LanguageButtonStyle"
+            android:text="@string/lang_turkish" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEnglish"
+            style="@style/LanguageButtonStyle"
+            android:layout_marginTop="20dp"
+            android:text="@string/lang_english" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFrench"
+            style="@style/LanguageButtonStyle"
+            android:layout_marginTop="20dp"
+            android:text="@string/lang_french" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnArabic"
+            style="@style/LanguageButtonStyle"
+            android:layout_marginTop="20dp"
+            android:text="@string/lang_arabic" />
+
+    </LinearLayout>
+
+    <!-- Valider Button: Initially hidden, appears after a language selection -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnTurkish"
-        style="@style/LanguageButtonStyle"
-        android:text="@string/lang_turkish" />
+        android:id="@+id/btnValiderLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_shape_global"
+        android:backgroundTint="#3498DB"
+        android:text="@string/btn_validate"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEnglish"
-        style="@style/LanguageButtonStyle"
-        android:layout_marginTop="20dp"
-        android:text="@string/lang_english" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFrench"
-        style="@style/LanguageButtonStyle"
-        android:layout_marginTop="20dp"
-        android:text="@string/lang_french" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnArabic"
-        style="@style/LanguageButtonStyle"
-        android:layout_marginTop="20dp"
-        android:text="@string/lang_arabic" />
-
-</LinearLayout>
+</RelativeLayout>
