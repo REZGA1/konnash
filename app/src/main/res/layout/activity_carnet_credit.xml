@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Carnet Crédit Dashboard - Clients Tab
+    Matches the provided Image 1.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/book_icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/shop_name"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="12dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_light_blue_btn"
+            android:src="@drawable/pc_icon" />
+
+        <!-- Youtube icon -->
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_light_blue_btn"
+            android:src="@drawable/yt_icon" />
+    </LinearLayout>
+
+    <!-- Tab Bar: CLIENTS / FOURNISSEURS -->
+    <LinearLayout
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/bg_contour_blue">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_clients"
+                android:textColor="#3498DB"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSwitchToFournisseurs"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_fournisseurs"
+                android:textColor="#7F8C8D" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Summary Box -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/summary_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tab_container"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_i_took" android:textSize="12sp" android:textColor="#7F8C8D" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0 DA" android:textColor="#27AE60" android:textSize="18sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/label_i_gave" android:textSize="12sp" android:textColor="#7F8C8D" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6.0 DA" android:textColor="#E74C3C" android:textSize="18sp" android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_marginEnd="16dp">
+                <ImageView android:layout_width="45dp" android:layout_height="45dp" android:background="@drawable/bg_light_blue_btn" android:padding="10dp" android:src="@android:drawable/ic_lock_idle_alarm" app:tint="#3498DB" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_recouvrement" android:textSize="10sp" android:textColor="#7F8C8D" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+                <ImageView android:layout_width="45dp" android:layout_height="45dp" android:background="@drawable/bg_light_blue_btn" android:padding="10dp" android:src="@android:drawable/ic_menu_sort_by_size" app:tint="#3498DB" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_rapports" android:textSize="10sp" android:textColor="#7F8C8D" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Search Section -->
+    <LinearLayout
+        android:id="@+id/search_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/summary_card"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_clients_count" android:textColor="#3498DB" android:textStyle="bold" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp" android:gravity="center_vertical">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_light_blue_btn"
+                android:hint="@string/hint_search"
+                android:paddingStart="16dp"
+                android:textSize="14sp"
+                android:inputType="text" />
+            <ImageView android:layout_width="45dp" android:layout_height="45dp" android:layout_marginStart="8dp" android:background="@drawable/bg_light_blue_btn" android:padding="12dp" android:src="@android:drawable/ic_menu_preferences" app:tint="#3498DB" />
+            <ImageView android:layout_width="45dp" android:layout_height="45dp" android:layout_marginStart="8dp" android:background="@drawable/bg_light_blue_btn" android:padding="12dp" android:src="@android:drawable/ic_menu_save" app:tint="#3498DB" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Placeholder Item -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_section"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_light_blue_btn"
+            android:gravity="center"
+            android:text="M"
+            android:textColor="#333333"
+            android:textStyle="bold" />
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mohamed Bbay" android:textColor="#333333" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aujourd'hui" android:textSize="12sp" android:textColor="#BDC3C7" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="end" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6.0 DA" android:textColor="#E74C3C" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="J'ai donné" android:textSize="10sp" android:textColor="#BDC3C7" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Floating Action Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFABAddClient"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/bottom_navigation"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:background="@drawable/button_shape_global"
+        android:backgroundTint="#3498DB"
+        android:text="@string/btn_add_client"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false" />
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_contour_blue" android:padding="8dp" android:src="@drawable/carnet_credit_icon_page" app:tint="#3498DB" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_credit" android:textColor="#3498DB" android:textSize="11sp" android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/carnet_caisse_icon_page" app:tint="#7F8C8D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_caisse" android:textColor="#7F8C8D" android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/profile_icon_page" app:tint="#7F8C8D" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_profil" android:textColor="#7F8C8D" android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_above="@id/bottom_navigation" android:background="#EEEEEE" />
+
+</RelativeLayout>

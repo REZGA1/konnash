@@ -1,7 +1,86 @@
 <resources>
+    <!-- language selection screen Strings -->
     <string name="app_name">Konnash</string>
     <string name="image_description">Online status indicator</string>
     <string name="button_text">Button</string>
     <string name="button2_text">Button 2</string>
     <string name="button3_text">Button 3</string>
+    <string name="app_logo_description">Konnash Logo</string>
+    <string name="lang_turkish">Turkish</string>
+    <string name="lang_english">English</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_arabic">العربية</string>
+
+    <!-- Complete Info Screen Strings -->
+    <string name="complete_info_title">Veuillez compléter vos\ninformations</string>
+    <string name="label_point_of_sale">NOM DU POINT DE VENTE</string>
+    <string name="hint_point_of_sale">Nom de point de vente</string>
+    <string name="btn_validate">VALIDER</string>
+
+    <!-- Carnet Credit Screen Strings -->
+    <string name="shop_name">el hadjar</string>
+    <string name="home_description">Ici, vous pouvez enregistrer tous les crédits et les avoirs de vos clients et fournisseurs</string>
+    <string name="btn_add_client">Ajouter client</string>
+    <string name="btn_add_supplier">Ajouter fournisseur</string>
+    <string name="nav_carnet_credit">Carnet Crédit</string>
+    <string name="nav_carnet_caisse">Carnet Caisse</string>
+    <string name="nav_profil">Profil</string>
+    <string name="tab_clients">CLIENTS</string>
+    <string name="tab_fournisseurs">FOURNISSEURS</string>
+    <string name="label_i_took">J\'ai pris</string>
+    <string name="label_i_gave">J\'ai donné</string>
+    <string name="label_recouvrement">Recouvrement</string>
+    <string name="label_rapports">Rapports</string>
+    <string name="hint_search">Recherche</string>
+    <string name="label_clients_count">Clients (1)</string>
+    <string name="label_fournisseurs_count">Fournisseurs (0)</string>
+    <string name="no_fournisseur_msg">Aucun fournisseur pour\nle moment. Ajoutez des\nfournisseurs</string>
+
+    <!-- Carnet Caisse Dashboard Strings -->
+    <string name="caisse_dashboard_description">Ici, vous pouvez enregistrer toutes vos entrées et dépenses</string>
+    <string name="btn_entree">ENTRÉE</string>
+    <string name="btn_sortie">SORTIE</string>
+
+    <!-- Ajouter Client/Fournisseur Strings -->
+    <string name="title_ajouter_client">AJOUTER CLIENT</string>
+    <string name="title_ajouter_fournisseur">AJOUTER FOURNISSE…</string>
+    <string name="label_nom">NOM</string>
+    <string name="hint_nom">Nom</string>
+    <string name="label_phone">NUMÉRO DE TÉLÉPHONE</string>
+    <string name="hint_phone">Numéro de téléphone</string>
+    <string name="label_adresse">ADRESSE</string>
+    <string name="hint_adresse">Adresse</string>
+    <string name="label_tags">Tags</string>
+    <string name="btn_ajouter_tags">Ajouter tags</string>
+    <string name="tags_desc">Utilisez des tags personnalisés (ex. : VIP, Grossiste, Région) pour classer vos contacts et les filtrer facilement</string>
+    <string name="btn_confirmer">CONFIRMER</string>
+
+    <!-- Adresse Screen Strings -->
+    <string name="title_adresse">ADRESSE</string>
+    <string name="label_ville">VILLE</string>
+    <string name="hint_ville">Ville</string>
+    <string name="label_pays">PAYS</string>
+    <string name="hint_pays">Pays</string>
+
+    <!-- Tags Screen Strings -->
+    <string name="title_gerer_tags">GÉRER LES TAGS</string>
+    <string name="btn_nouveau_tag">AJOUTER UN NOUVEAU TAG</string>
+    <string name="empty_tags_msg">Aucun tag client, créez votre premier tag</string>
+
+    <!-- Profil Screen Strings -->
+    <string name="profil_title">Profil</string>
+    <string name="invite_friends">Invitez vos amis</string>
+    <string name="menu_carte_visite">Carte de visite</string>
+    <string name="menu_inventaire">Inventaire et Personnel</string>
+    <string name="menu_configuration">Configuration</string>
+    <string name="menu_sauvegarde">Sauvegarde</string>
+    <string name="menu_contact">Contactez nous</string>
+    <string name="about_app">A propos de Konnash</string>
+    <string name="app_version">Version 2.18.12-prod</string>
+    <string name="legal_text">Conditions d\'utilisation-Politique de confidentialité</string>
+
+    <!-- Entree/Sortie Screen Strings -->
+    <string name="label_entree">Entrée</string>
+    <string name="label_sortie">Sortie</string>
+    <string name="default_amount">0,00 DA</string>
 </resources>
