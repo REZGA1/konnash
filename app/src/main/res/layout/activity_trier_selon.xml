@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Trier Selon Screen
+    Updated: Removed default checked values to ensure no initial selection.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#3498DB"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_sort_by"
+            android:textColor="#3498DB"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header"
+        android:layout_above="@id/btnApply"
+        android:padding="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Filtrer par section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_filter_by"
+                android:textColor="#3498DB"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgFilterBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <RadioButton
+                    android:id="@+id/rbFilterAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/filter_all"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:id="@+id/rbFilterActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/filter_active"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:id="@+id/rbFilterArchived"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/filter_archived"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+            </RadioGroup>
+
+            <!-- Trier selon section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/label_sort_by"
+                android:textColor="#3498DB"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgSortBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/sort_recent"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/sort_old"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/sort_amount_asc"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/sort_amount_desc"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/sort_alpha"
+                    android:textColor="@color/selector_selection_text"
+                    android:buttonTint="#3498DB"
+                    android:checked="false" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_shape_global"
+        android:backgroundTint="#3498DB"
+        android:text="@string/btn_apply"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</RelativeLayout>

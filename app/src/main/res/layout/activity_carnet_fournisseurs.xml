@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Carnet Crédit Dashboard - Fournisseurs Tab
-    Matches Image 2 provided by the user.
+    Updated: Linked the settings icon (btnFilter) to the Filtre page.
 -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,8 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/book_icon" />
+            android:src="@drawable/book_icon"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:layout_width="0dp"
@@ -41,17 +43,19 @@
             android:layout_marginEnd="12dp"
             android:padding="10dp"
             android:background="@drawable/bg_light_blue_btn"
-            android:src="@drawable/pc_icon" />
+            android:src="@drawable/pc_icon"
+            android:contentDescription="@null" />
 
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:padding="10dp"
             android:background="@drawable/bg_light_blue_btn"
-            android:src="@drawable/yt_icon" />
+            android:src="@drawable/yt_icon"
+            android:contentDescription="@null" />
     </LinearLayout>
 
-    <!-- Tab Bar: CLIENTS / FOURNISSEURS -->
+    <!-- Tab Bar -->
     <LinearLayout
         android:id="@+id/tab_container"
         android:layout_width="match_parent"
@@ -66,7 +70,9 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +87,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginStart="8dp"
-            android:background="@drawable/bg_contour_blue">
+            android:background="@drawable/bg_contour_blue"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,32 +122,50 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_i_took" android:textSize="12sp" android:textColor="#7F8C8D" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0 DA" android:textColor="#27AE60" android:textSize="18sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0 DA" android:textColor="#27AE60" android:textSize="18sp" android:textStyle="bold" tools:ignore="HardcodedText" />
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/label_i_gave" android:textSize="12sp" android:textColor="#7F8C8D" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0 DA" android:textColor="#E74C3C" android:textSize="18sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0 DA" android:textColor="#E74C3C" android:textSize="18sp" android:textStyle="bold" tools:ignore="HardcodedText" />
             </LinearLayout>
 
-            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
-                <ImageView android:layout_width="45dp" android:layout_height="45dp" android:background="@drawable/bg_light_blue_btn" android:padding="10dp" android:src="@android:drawable/ic_menu_sort_by_size" app:tint="#3498DB" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_rapports" android:textSize="10sp" android:textColor="#7F8C8D" />
+            <LinearLayout
+                android:id="@+id/btnGoToRapports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_light_blue_btn"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:tint="#3498DB"
+                    android:contentDescription="@string/label_rapports" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_rapports"
+                    android:textSize="10sp"
+                    android:textColor="#7F8C8D" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Content: Empty State -->
+    <!-- Search Section -->
     <LinearLayout
+        android:id="@+id/search_section"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/summary_card"
-        android:layout_above="@id/bottom_navigation"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="start" android:layout_marginBottom="8dp" android:text="@string/label_fournisseurs_count" android:textColor="#3498DB" android:textStyle="bold" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_fournisseurs_count" android:textColor="#3498DB" android:textStyle="bold" />
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="24dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp" android:gravity="center_vertical">
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="45dp"
@@ -147,16 +173,44 @@
                 android:background="@drawable/bg_light_blue_btn"
                 android:hint="@string/hint_search"
                 android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:textSize="14sp"
-                android:inputType="text" />
-            <ImageView android:layout_width="45dp" android:layout_height="45dp" android:layout_marginStart="8dp" android:background="@drawable/bg_light_blue_btn" android:padding="12dp" android:src="@android:drawable/ic_menu_preferences" app:tint="#3498DB" />
-            <ImageView android:layout_width="45dp" android:layout_height="45dp" android:layout_marginStart="8dp" android:background="@drawable/bg_light_blue_btn" android:padding="12dp" android:src="@android:drawable/ic_menu_save" app:tint="#3498DB" />
+                android:inputType="text"
+                android:autofillHints="name" />
+
+            <!-- Filter Button -->
+            <ImageView
+                android:id="@+id/btnFilter"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_light_blue_btn"
+                android:padding="12dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="#3498DB"
+                android:contentDescription="@null"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <ImageView android:layout_width="45dp" android:layout_height="45dp" android:layout_marginStart="8dp" android:background="@drawable/bg_light_blue_btn" android:padding="12dp" android:src="@android:drawable/ic_menu_save" app:tint="#3498DB" android:contentDescription="@null" />
         </LinearLayout>
+    </LinearLayout>
+
+    <!-- Content Area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_section"
+        android:layout_above="@id/bottom_navigation"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/carnet_credit_illustration" />
+            android:src="@drawable/carnet_credit_illustration"
+            android:contentDescription="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -168,7 +222,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Floating Action Button -->
+    <!-- FAB -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFABAddFournisseur"
         android:layout_width="wrap_content"
@@ -194,17 +248,25 @@
         android:background="#FFFFFF"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingTop="8dp">
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-            <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_contour_blue" android:padding="8dp" android:src="@drawable/carnet_credit_icon_page" app:tint="#3498DB" />
+        android:paddingTop="8dp"
+        android:baselineAligned="false">
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_contour_blue"
+                android:padding="8dp"
+                android:src="@drawable/carnet_credit_icon_page"
+                app:tint="#3498DB"
+                android:contentDescription="@string/nav_carnet_credit" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_credit" android:textColor="#3498DB" android:textSize="11sp" android:textStyle="bold" />
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/carnet_caisse_icon_page" app:tint="#7F8C8D" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/carnet_caisse_icon_page" app:tint="#7F8C8D" android:contentDescription="@string/nav_carnet_caisse" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_caisse" android:textColor="#7F8C8D" android:textSize="11sp" />
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/profile_icon_page" app:tint="#7F8C8D" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/profile_icon_page" app:tint="#7F8C8D" android:contentDescription="@string/nav_profil" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_profil" android:textColor="#7F8C8D" android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>

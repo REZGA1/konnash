@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Filtre Screen
+    Allows user to filter and sort transactions with blue border selection.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#3498DB"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_filtre"
+            android:textColor="#3498DB"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header"
+        android:layout_above="@id/btnApply"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Section: Filtrer par -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                android:layout_marginBottom="16dp"
+                app:contentPadding="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/button_shape_global"
+                    android:backgroundTint="#F8F9FA">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_filter_by"
+                        android:textColor="#3498DB"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2">
+
+                        <!-- Item: Tout -->
+                        <RelativeLayout
+                            android:id="@+id/itemFilterTout"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/filter_all" android:layout_centerVertical="true" android:textColor="#333333" />
+                            <RadioButton android:id="@+id/rbFilterTout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" android:checked="true" />
+                        </RelativeLayout>
+
+                        <!-- Item: J'ai pris -->
+                        <RelativeLayout
+                            android:id="@+id/itemFilterPris"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_i_took" android:layout_centerVertical="true" android:textColor="#333333" />
+                            <RadioButton android:id="@+id/rbFilterPris" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+
+                        <!-- Item: Soldé -->
+                        <RelativeLayout
+                            android:id="@+id/itemFilterSolde"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_solde" android:layout_centerVertical="true" android:textColor="#333333" />
+                            <RadioButton android:id="@+id/rbFilterSolde" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+
+                        <!-- Item: J'ai donné -->
+                        <RelativeLayout
+                            android:id="@+id/itemFilterDonne"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_i_gave" android:layout_centerVertical="true" android:textColor="#333333" />
+                            <RadioButton android:id="@+id/rbFilterDonne" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section: Trier selon -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                android:layout_marginBottom="16dp"
+                app:contentPadding="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/button_shape_global"
+                    android:backgroundTint="#F8F9FA">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_sort_by"
+                        android:textColor="#3498DB"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2">
+
+                        <RelativeLayout
+                            android:id="@+id/itemSortRecent"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sort_recent" android:layout_centerVertical="true" android:textColor="#333333" android:maxWidth="80dp" />
+                            <RadioButton android:id="@+id/rbSortRecent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" android:checked="true" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/itemSortOld"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sort_old" android:layout_centerVertical="true" android:textColor="#333333" android:maxWidth="80dp" />
+                            <RadioButton android:id="@+id/rbSortOld" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/itemSortAsc"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sort_amount_asc" android:layout_centerVertical="true" android:textColor="#333333" android:maxWidth="80dp" />
+                            <RadioButton android:id="@+id/rbSortAsc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/itemSortDesc"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sort_amount_desc" android:layout_centerVertical="true" android:textColor="#333333" android:maxWidth="80dp" />
+                            <RadioButton android:id="@+id/rbSortDesc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/itemSortAlpha"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="4dp"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_filter_option_selector"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sort_alpha" android:layout_centerVertical="true" android:textColor="#333333" />
+                            <RadioButton android:id="@+id/rbSortAlpha" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:buttonTint="#3498DB" android:clickable="false" />
+                        </RelativeLayout>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section: Tags -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:contentPadding="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/button_shape_global"
+                    android:backgroundTint="#F8F9FA">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_tags"
+                            android:textColor="#3498DB"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_centerVertical="true" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnManageTags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/bg_light_blue_btn"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:text="@string/btn_gerer_tags"
+                            android:textAllCaps="false"
+                            android:textColor="#3498DB"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tags_desc"
+                        android:textColor="#BDC3C7"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Apply Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_shape_global"
+        android:backgroundTint="#3498DB"
+        android:text="@string/btn_apply"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</RelativeLayout>

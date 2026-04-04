@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Darker color when selected/checked -->
+    <item android:state_checked="true" android:color="#212121" />
+    <item android:state_selected="true" android:color="#212121" />
+    <!-- Lighter color for default state -->
+    <item android:color="#7F8C8D" />
+</selector>
