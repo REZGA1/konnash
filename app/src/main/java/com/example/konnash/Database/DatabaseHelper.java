@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME    = "app_db";
-    private static final int    DB_VERSION = 1;
+    private static final String DB_NAME = "konnash.db";
+    private static final int DB_VERSION = 1;
 
     private static DatabaseHelper instance;
 
@@ -24,22 +24,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(
-                "CREATE TABLE user_profile ("          +
-                        "id               INTEGER PRIMARY KEY," +
-                        "store_name       TEXT NOT NULL,"       +
-                        "phone            TEXT NOT NULL,"       +
-                        "country_code     TEXT NOT NULL,"       +
-                        "activity_type    TEXT,"                +
-                        "sector           TEXT,"                +
-                        "initial_balance  REAL DEFAULT 0,"      +
-                        "open_date        TEXT)"
+                "CREATE TABLE user_profile (" +
+                        "id INTEGER PRIMARY KEY CHECK(id = 1)," +
+                        "store_name TEXT NOT NULL," +
+                        "phone TEXT NOT NULL," +
+                        "country_code TEXT NOT NULL," +
+                        "activity_type TEXT," +
+                        "sector TEXT," +
+                        "income  REAL DEFAULT 0," +
+                        "expense REAL DEFAULT 0," +
+                        "open_date INTEGER)"
         );
+
+
+        db.execSQL(
+                "CREATE TABLE app_settings (" +
+                        "id INTEGER PRIMARY KEY CHECK(id = 1)," +
+                        "language TEXT NOT NULL DEFAULT 'ar'," +
+                        "pin_code TEXT)"
+        );
+
+        db.execSQL(
+                "CREATE TABLE business_card (" +
+                        "id INTEGER PRIMARY KEY CHECK(id = 1)," +
+                        "personal_name TEXT," +
+                        "store_name TEXT," +
+                        "phone TEXT," +
+                        "business_description TEXT," +
+                        "address TEXT," +
+                        "city TEXT)"
+        );
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS user_profile");
+        db.execSQL("DROP TABLE IF EXISTS app_settings");
+        db.execSQL("DROP TABLE IF EXISTS business_card");
         onCreate(db);
     }
 }
