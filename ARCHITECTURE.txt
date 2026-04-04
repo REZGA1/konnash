@@ -1,0 +1,45 @@
+تطبيق Konnash - دليل البنية
+==========================
+
+✅ تم إنشاء 3 طبقات أساسية:
+
+📁 Model Layer - الطبقة الأولى
+   └─ User.java
+      - اسم المتجر (تعديل)
+      - رقم الهاتف (ثابت)
+      - رمز الدولة (ثابت)
+      - نوع النشاط (تعديل)
+      - القطاع (تعديل)
+      - الرصيد (قراءة فقط)
+
+📁 Database Layer - الطبقة الثانية
+   ├─ DatabaseHelper.java (إنشاء قاعدة البيانات)
+   └─ UserDB.java (عمليات CRUD)
+
+📁 Business_Logic Layer - الطبقة الثالثة
+   └─ UserManager.java (التحقق والعمليات الآمنة)
+
+
+🎯 استخدام بسيط:
+================
+
+UserManager manager = new UserManager(context);
+
+// إضافة
+manager.addNewUser("محل علي", "0501234567", "+213", "تجارة", "إلكترونيات", 5000);
+
+// البحث
+User user = manager.findUserByPhone("0501234567");
+
+// تحديث
+manager.updateUserData("0501234567", "الاسم الجديد", "النوع", "القطاع");
+
+// تحديث رصيد
+manager.updateUserBalance("0501234567", 7500);
+
+// حذف
+manager.deleteUser("0501234567");
+
+// جميع المستخدمين
+List<User> users = manager.getAllUsers();
+
