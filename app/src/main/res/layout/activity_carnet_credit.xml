@@ -2,6 +2,7 @@
 <!--
     Carnet Crédit Dashboard - Clients Tab
     Matches the provided Image 1.
+    Includes click logic for switching between Clients and Fournisseurs.
 -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -43,7 +44,6 @@
             android:background="@drawable/bg_light_blue_btn"
             android:src="@drawable/pc_icon" />
 
-        <!-- Youtube icon -->
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -62,12 +62,16 @@
         android:paddingRight="16dp"
         android:orientation="horizontal">
 
+        <!-- Clients Tab (Active) -->
         <LinearLayout
+            android:id="@+id/btnTabClients"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/bg_contour_blue">
+            android:background="@drawable/bg_contour_blue"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,13 +80,16 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- Fournisseurs Tab (Inactive) -->
         <LinearLayout
-            android:id="@+id/btnSwitchToFournisseurs"
+            android:id="@+id/btnTabFournisseurs"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginStart="8dp">
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

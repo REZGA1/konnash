@@ -27,16 +27,33 @@ public class MainActivity extends AppCompatActivity {
         applyWindowInsets(findViewById(R.id.main));
 
         View btnValider = findViewById(R.id.btnValiderLanguage);
+        View btnTurkish = findViewById(R.id.btnTurkish);
+        View btnEnglish = findViewById(R.id.btnEnglish);
+        View btnFrench = findViewById(R.id.btnFrench);
+        View btnArabic = findViewById(R.id.btnArabic);
 
-        // Language buttons listener - show the Valider button on click
+        View[] langButtons = {btnTurkish, btnEnglish, btnFrench, btnArabic};
+
+        // Language buttons listener - show the Valider button and highlight selection
         View.OnClickListener langClickListener = v -> {
             if (btnValider != null) btnValider.setVisibility(View.VISIBLE);
+            
+            // Reset all buttons to default and highlight the selected one
+            for (View btn : langButtons) {
+                if (btn != null) {
+                    if (btn == v) {
+                        btn.setBackgroundResource(R.drawable.button_shape_selected);
+                    } else {
+                        btn.setBackgroundResource(R.drawable.button_shape_global);
+                    }
+                }
+            }
         };
 
-        findViewById(R.id.btnTurkish).setOnClickListener(langClickListener);
-        findViewById(R.id.btnEnglish).setOnClickListener(langClickListener);
-        findViewById(R.id.btnFrench).setOnClickListener(langClickListener);
-        findViewById(R.id.btnArabic).setOnClickListener(langClickListener);
+        if (btnTurkish != null) btnTurkish.setOnClickListener(langClickListener);
+        if (btnEnglish != null) btnEnglish.setOnClickListener(langClickListener);
+        if (btnFrench != null) btnFrench.setOnClickListener(langClickListener);
+        if (btnArabic != null) btnArabic.setOnClickListener(langClickListener);
 
         if (btnValider != null) {
             btnValider.setOnClickListener(v -> showCompleteInfo());
@@ -95,6 +112,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil);
         applyWindowInsets(findViewById(R.id.main_root));
         setupBottomNav();
+    }
+
+    // --- Entree / Sortie Screens ---
+
+    private void showEntree() {
+        setContentView(R.layout.activity_entree);
+        applyWindowInsets(findViewById(R.id.main_root));
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
+
+        View btnValider = findViewById(R.id.btnValider);
+        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
+    }
+
+    private void showSortie() {
+        setContentView(R.layout.activity_sortie);
+        applyWindowInsets(findViewById(R.id.main_root));
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
+
+        View btnValider = findViewById(R.id.btnValider);
+        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
     }
 
     // --- Sub-Screens / Form Screens ---
@@ -164,28 +205,6 @@ public class MainActivity extends AppCompatActivity {
             if ("client".equals(source)) showAjouterClient();
             else showAjouterFournisseur();
         });
-    }
-
-    private void showEntree() {
-        setContentView(R.layout.activity_entree);
-        applyWindowInsets(findViewById(R.id.main_root));
-
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
-
-        View btnValider = findViewById(R.id.btnValider);
-        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
-    }
-
-    private void showSortie() {
-        setContentView(R.layout.activity_sortie);
-        applyWindowInsets(findViewById(R.id.main_root));
-
-        View btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) btnBack.setOnClickListener(v -> showCarnetCaisse());
-
-        View btnValider = findViewById(R.id.btnValider);
-        if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
     }
 
     // --- Shared UI Logic Helpers ---
