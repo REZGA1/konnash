@@ -7,7 +7,7 @@ public class UserProfile {
     private String countryCode;
     private String activityType;
     private String sector;
-    private double balance;
+
     private double income;   // الدخل
     private double expense;  // المصروف
     private long openDate; // الوقت
