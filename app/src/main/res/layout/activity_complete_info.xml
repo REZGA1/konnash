@@ -29,11 +29,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Back Button -->
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="#3498DB" />
+
             <!-- Page Title: "Veuillez compléter vos informations" with top margin -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/complete_info_title"
                 android:textColor="#3498DB"
                 android:textSize="28sp"

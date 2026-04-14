@@ -4,8 +4,9 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.Calendar;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         applyWindowInsets(findViewById(R.id.main));
         View btnValider = findViewById(R.id.btnValidate);
         if (btnValider != null) btnValider.setOnClickListener(v -> showCarnetCaisse());
+        
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) btnBack.setOnClickListener(v -> showLanguageSelection());
     }
 
     // --- Main Dashboard Screens ---
@@ -100,93 +105,164 @@ public class MainActivity extends AppCompatActivity {
         if (btnFilter != null) btnFilter.setOnClickListener(v -> showFiltre("fournisseur"));
     }
 
+    private double currentSolde = 0.0;
+
     private void showCarnetCaisse() {
-        setContentView(R.layout.activity_carnet_caisse);
+        if (currentSolde != 0) {
+            setContentView(R.layout.activity_carnet_caisse_data);
+        } else {
+            setContentView(R.layout.activity_carnet_caisse);
+        }
         applyWindowInsets(findViewById(R.id.main_root));
         setupBottomNav();
-        
+
+        TextView tvSolde = findViewById(R.id.tvTotalSolde);
+        if (tvSolde != null) tvSolde.setText(getString(R.string.amount_format_da, currentSolde));
+
+        TextView tvTotalEntrees = findViewById(R.id.tvTotalEntrees);
+        if (tvTotalEntrees != null) tvTotalEntrees.setText(getString(R.string.amount_format_da, currentSolde));
+
+        TextView tvItemAmount = findViewById(R.id.tvItemAmount);
+        if (tvItemAmount != null) tvItemAmount.setText(getString(R.string.amount_format_da, currentSolde));
+
+        TextView tvItemSolde = findViewById(R.id.tvItemSolde);
+        if (tvItemSolde != null) tvItemSolde.setText(getString(R.string.solde_format_da, currentSolde));
+
         View btnEntree = findViewById(R.id.btnEntree);
         if (btnEntree != null) btnEntree.setOnClickListener(v -> showEntree());
 
         View btnSortie = findViewById(R.id.btnSortie);
         if (btnSortie != null) btnSortie.setOnClickListener(v -> showSortie());
-    }
 
-    private void showProfil() {
-        setContentView(R.layout.activity_profil);
-        applyWindowInsets(findViewById(R.id.main_root));
-        setupBottomNav();
-    }
+        View btnHistorique = findViewById(R.id.btnHistorique);
+        if (btnHistorique != null) btnHistorique.setOnClickListener(v -> showHistorique());
 
-    // --- Filter Screen ---
+        View btnRapports = findViewById(R.id.btnRapports);
+        if (btnRapports != null) btnRapports.setOnClickListener(v -> showRapports("caisse"));
 
-    private void showFiltre(String source) {
-        setContentView(R.layout.activity_filtre);
-        applyWindowInsets(findViewById(R.id.main_root));
+        View btnFermer = findViewById(R.id.btnFermer);
+        if (btnFermer != null) btnFermer.setOnClickListener(v -> showFermerCaisse());
 
-        View btnClose = findViewById(R.id.btnClose);
-        View btnApply = findViewById(R.id.btnApply);
-        View btnManageTags = findViewById(R.id.btnManageTags);
+        View itemOperation = findViewById(R.id.layoutOperationItem);
+        if (itemOperation != null) itemOperation.setOnClickListener(v -> showEntreeDetail());
 
-        View.OnClickListener goBack = v -> {
-            if ("credit".equals(source)) showCarnetCredit();
-            else showCarnetFournisseurs();
-        };
-
-        if (btnClose != null) btnClose.setOnClickListener(goBack);
-        if (btnApply != null) btnApply.setOnClickListener(goBack);
-        if (btnManageTags != null) btnManageTags.setOnClickListener(v -> showGererTags(source));
-
-        setupFilterSelectionLogic();
-    }
-
-    private void setupFilterSelectionLogic() {
-        // "Filtrer par" group
-        int[] filterContainerIds = {R.id.itemFilterTout, R.id.itemFilterPris, R.id.itemFilterSolde, R.id.itemFilterDonne};
-        int[] filterRadioIds = {R.id.rbFilterTout, R.id.rbFilterPris, R.id.rbFilterSolde, R.id.rbFilterDonne};
-
-        // "Trier selon" group
-        int[] sortContainerIds = {R.id.itemSortRecent, R.id.itemSortOld, R.id.itemSortAsc, R.id.itemSortDesc, R.id.itemSortAlpha};
-        int[] sortRadioIds = {R.id.rbSortRecent, R.id.rbSortOld, R.id.rbSortAsc, R.id.rbSortDesc, R.id.rbSortAlpha};
-
-        setupSelectionGroup(filterContainerIds, filterRadioIds);
-        setupSelectionGroup(sortContainerIds, sortRadioIds);
-    }
-
-    private void setupSelectionGroup(int[] containerIds, int[] radioIds) {
-        for (int i = 0; i < containerIds.length; i++) {
-            final int index = i;
-            View container = findViewById(containerIds[i]);
-            if (container != null) {
-                container.setOnClickListener(v -> {
-                    // Update selection state for all items in the group
-                    for (int j = 0; j < containerIds.length; j++) {
-                        View c = findViewById(containerIds[j]);
-                        RadioButton rb = findViewById(radioIds[j]);
-                        if (c != null && rb != null) {
-                            boolean isSelected = (j == index);
-                            c.setSelected(isSelected); // Triggers blue border in selector
-                            rb.setChecked(isSelected); // Fills blue dot
-                        }
-                    }
-                });
-            }
+        View btnDownload = findViewById(R.id.btnDownload);
+        if (btnDownload != null) {
+            btnDownload.setOnClickListener(v -> Toast.makeText(this, "Export PDF en cours...", Toast.LENGTH_SHORT).show());
         }
     }
 
-    // --- Rapport Screens ---
+    private void showHistorique() {
+        setContentView(R.layout.activity_historique);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
+    }
+
+    private void showFermerCaisse() {
+        setContentView(R.layout.activity_fermer_caisse);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
+        
+        TextView tvSolde = findViewById(R.id.tvFermerSolde);
+        TextView tvEntree = findViewById(R.id.tvFermerEntree);
+        if (tvSolde != null) tvSolde.setText(getString(R.string.amount_format_da, currentSolde));
+        if (tvEntree != null) tvEntree.setText(getString(R.string.amount_format_da, currentSolde));
+
+        findViewById(R.id.btnCloseCaisse).setOnClickListener(v -> {
+            currentSolde = 0;
+            showCarnetCaisse();
+        });
+    }
+
+    private void showEntreeDetail() {
+        setContentView(R.layout.activity_entree_detail);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
+    }
+
+    private void showEntree() {
+        setContentView(R.layout.activity_entree);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
+        
+        TextView tvAmount = findViewById(R.id.tvAmount);
+        setupKeypad(tvAmount);
+
+        findViewById(R.id.btnValider).setOnClickListener(v -> {
+            String amountStr = tvAmount.getText().toString().replace(" DA", "").replace(",", ".");
+            try {
+                double addedAmount = Double.parseDouble(amountStr);
+                currentSolde += addedAmount;
+            } catch (NumberFormatException ignored) {}
+            showCarnetCaisse();
+        });
+    }
+
 
     private void showRapports(String source) {
-        setContentView(R.layout.activity_rapports);
+        if ("caisse".equals(source)) {
+            setContentView(R.layout.activity_rapports_caisse);
+        } else {
+            setContentView(R.layout.activity_rapports);
+        }
         applyWindowInsets(findViewById(R.id.main_root));
 
         findViewById(R.id.btnBack).setOnClickListener(v -> {
             if ("credit".equals(source)) showCarnetCredit();
-            else showCarnetFournisseurs();
+            else if ("fournisseur".equals(source)) showCarnetFournisseurs();
+            else showCarnetCaisse();
         });
 
-        findViewById(R.id.btnModifyPeriod).setOnClickListener(v -> showPeriodeRapport(source));
-        findViewById(R.id.btnSort).setOnClickListener(v -> showTrierSelon(source));
+        View btnModifyPeriod = findViewById(R.id.btnModifyPeriod);
+        if (btnModifyPeriod == null) btnModifyPeriod = findViewById(R.id.btnSelectPeriod); // activity_rapports_caisse use btnSelectPeriod
+        
+        if (btnModifyPeriod != null) {
+            btnModifyPeriod.setOnClickListener(v -> showPeriodeRapport(source));
+        }
+
+        View tabApercu = findViewById(R.id.tabApercu);
+        View tabDetails = findViewById(R.id.tabDetails);
+        View layoutOverview = findViewById(R.id.layoutOverview);
+        View layoutDetails = findViewById(R.id.layoutDetails);
+
+        if (tabApercu != null && tabDetails != null) {
+            tabApercu.setOnClickListener(v -> {
+                if (layoutOverview != null) layoutOverview.setVisibility(View.VISIBLE);
+                if (layoutDetails != null) layoutDetails.setVisibility(View.GONE);
+                tabApercu.setBackgroundResource(R.drawable.button_shape_global);
+                tabApercu.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
+                ((TextView)tabApercu).setTextColor(0xFF3498DB);
+                tabDetails.setBackground(null);
+                ((TextView)tabDetails).setTextColor(0xFF7F8C8D);
+            });
+            tabDetails.setOnClickListener(v -> {
+                if (layoutOverview != null) layoutOverview.setVisibility(View.GONE);
+                if (layoutDetails != null) layoutDetails.setVisibility(View.VISIBLE);
+                tabDetails.setBackgroundResource(R.drawable.button_shape_global);
+                tabDetails.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
+                ((TextView)tabDetails).setTextColor(0xFF3498DB);
+                tabApercu.setBackground(null);
+                ((TextView)tabApercu).setTextColor(0xFF7F8C8D);
+            });
+        }
+
+        TextView tvSolde = findViewById(R.id.tvSummarySolde);
+        
+        if (tvSolde != null) tvSolde.setText(getString(R.string.amount_format_da, currentSolde));
+        
+        TextView tvSummaryEntree = findViewById(R.id.tvSummaryEntree);
+        if (tvSummaryEntree != null) tvSummaryEntree.setText(getString(R.string.amount_format_da, currentSolde));
+
+        TextView tvDetailAmount = findViewById(R.id.tvDetailAmount);
+        if (tvDetailAmount != null) tvDetailAmount.setText(getString(R.string.amount_format_da, currentSolde));
+
+        TextView tvDetailSolde = findViewById(R.id.tvDetailSolde);
+        if (tvDetailSolde != null) tvDetailSolde.setText(getString(R.string.solde_format_da, currentSolde));
+
+        View btnDownload = findViewById(R.id.btnDownload);
+        if (btnDownload != null) {
+            btnDownload.setOnClickListener(v -> Toast.makeText(this, "Export PDF en cours...", Toast.LENGTH_SHORT).show());
+        }
     }
 
     private void showPeriodeRapport(String source) {
@@ -202,6 +278,49 @@ public class MainActivity extends AppCompatActivity {
         if (tvEndDate != null) tvEndDate.setOnClickListener(v -> showCalendar(tvEndDate));
     }
 
+    private void showProfil() {
+        setContentView(R.layout.activity_profil);
+        applyWindowInsets(findViewById(R.id.main_root));
+        setupBottomNav();
+    }
+
+    private void showSortie() {
+        setContentView(R.layout.activity_sortie);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
+        
+        TextView tvAmount = findViewById(R.id.tvAmount);
+        setupKeypad(tvAmount);
+
+        findViewById(R.id.btnValider).setOnClickListener(v -> {
+            String amountStr = tvAmount.getText().toString().replace(" DA", "").replace(",", ".");
+            try {
+                double subAmount = Double.parseDouble(amountStr);
+                currentSolde -= subAmount;
+            } catch (NumberFormatException ignored) {}
+            showCarnetCaisse();
+        });
+    }
+
+    private void showFiltre(String source) {
+        setContentView(R.layout.activity_filtre);
+        applyWindowInsets(findViewById(R.id.main_root));
+        findViewById(R.id.btnClose).setOnClickListener(v -> {
+            if ("credit".equals(source)) showCarnetCredit();
+            else showCarnetFournisseurs();
+        });
+    }
+
+    private void showAjouterClient() {
+        setContentView(R.layout.activity_ajouter_client);
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCredit());
+    }
+
+    private void showAjouterFournisseur() {
+        setContentView(R.layout.activity_ajouter_fournisseur);
+        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetFournisseurs());
+    }
+
     private void showCalendar(TextView targetView) {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -209,71 +328,90 @@ public class MainActivity extends AppCompatActivity {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year1, monthOfYear, dayOfMonth) -> targetView.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1),
+                (view, year1, monthOfYear, dayOfMonth) -> targetView.setText(getString(R.string.date_format, dayOfMonth, (monthOfYear + 1), year1)),
                 year, month, day);
         datePickerDialog.show();
     }
 
-    private void showTrierSelon(String source) {
-        setContentView(R.layout.activity_trier_selon);
-        applyWindowInsets(findViewById(R.id.main_root));
-
-        findViewById(R.id.btnClose).setOnClickListener(v -> showRapports(source));
-        findViewById(R.id.btnApply).setOnClickListener(v -> showRapports(source));
-    }
-
-    // --- Sub-Screens / Form Screens ---
-
-    private void showAjouterClient() {
-        setContentView(R.layout.activity_ajouter_client);
-        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCredit());
-        findViewById(R.id.btnConfirmer).setOnClickListener(v -> showCarnetCredit());
-        findViewById(R.id.btnGoToAddress).setOnClickListener(v -> showAdresse("client"));
-        findViewById(R.id.btnGoToTags).setOnClickListener(v -> showGererTags("client"));
-    }
-
-    private void showAjouterFournisseur() {
-        setContentView(R.layout.activity_ajouter_fournisseur);
-        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetFournisseurs());
-        findViewById(R.id.btnConfirmer).setOnClickListener(v -> showCarnetFournisseurs());
-        findViewById(R.id.btnGoToAddress).setOnClickListener(v -> showAdresse("fournisseur"));
-        findViewById(R.id.btnGoToTags).setOnClickListener(v -> showGererTags("fournisseur"));
-    }
-
-    private void showAdresse(String source) {
-        setContentView(R.layout.activity_adresse);
-        applyWindowInsets(findViewById(R.id.main_root));
-        View.OnClickListener goBack = v -> {
-            if ("client".equals(source)) showAjouterClient();
-            else showAjouterFournisseur();
-        };
-        findViewById(R.id.btnClose).setOnClickListener(goBack);
-        findViewById(R.id.btnValider).setOnClickListener(goBack);
-    }
-
-    private void showGererTags(String source) {
-        setContentView(R.layout.activity_gerer_tags);
-        findViewById(R.id.btnClose).setOnClickListener(v -> {
-            if ("client".equals(source)) showAjouterClient();
-            else showAjouterFournisseur();
-        });
-    }
-
-    private void showEntree() {
-        setContentView(R.layout.activity_entree);
-        applyWindowInsets(findViewById(R.id.main_root));
-        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
-        findViewById(R.id.btnValider).setOnClickListener(v -> showCarnetCaisse());
-    }
-
-    private void showSortie() {
-        setContentView(R.layout.activity_sortie);
-        applyWindowInsets(findViewById(R.id.main_root));
-        findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCaisse());
-        findViewById(R.id.btnValider).setOnClickListener(v -> showCarnetCaisse());
-    }
-
     // --- Helpers ---
+
+    private void setupKeypad(TextView tvAmount) {
+        View.OnClickListener listener = v -> {
+            if (v instanceof Button) {
+                String text = ((Button) v).getText().toString();
+                String current = tvAmount.getText().toString().replace(" DA", "").replace(",", ".");
+                
+                if (text.equals("AC")) {
+                    tvAmount.setText(R.string.default_amount);
+                } else if (text.equals("=")) {
+                    try {
+                        double result = evaluate(current);
+                        tvAmount.setText(getString(R.string.amount_format_da, result));
+                    } catch (Exception ignored) {}
+                } else if (text.equals("+") || text.equals("-") || text.equals("×") || text.equals("/")) {
+                    tvAmount.setText(getString(R.string.amount_operator_format, current, text));
+                } else {
+                    if (current.equals("0.00") || current.equals("0")) {
+                        tvAmount.setText(getString(R.string.amount_simple_format, text));
+                    } else {
+                        tvAmount.setText(getString(R.string.amount_simple_format, current + text));
+                    }
+                }
+            }
+        };
+
+        // Find all buttons in the GridLayout and attach listener
+        ViewGroup keypad = null;
+        View root = findViewById(R.id.main_root);
+        if (root instanceof ViewGroup) {
+            ViewGroup vg = (ViewGroup) root;
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                View child = vg.getChildAt(i);
+                if (child instanceof LinearLayout) {
+                    ViewGroup ll = (ViewGroup) child;
+                    for (int j = 0; j < ll.getChildCount(); j++) {
+                        if (ll.getChildAt(j) instanceof GridLayout) {
+                            keypad = (GridLayout) ll.getChildAt(j);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (keypad != null) {
+            for (int i = 0; i < keypad.getChildCount(); i++) {
+                keypad.getChildAt(i).setOnClickListener(listener);
+            }
+        }
+    }
+
+    private double evaluate(String expression) {
+        try {
+            String expr = expression.replace("×", "*").replace(",", ".");
+            return new Object() {
+                int pos = -1, ch;
+                void nextChar() { ch = (++pos < expr.length()) ? expr.charAt(pos) : -1; }
+                boolean eat(int charToEat) {
+                    while (ch == ' ') nextChar();
+                    if (ch == charToEat) { nextChar(); return true; }
+                    return false;
+                }
+                double parse() { nextChar(); double x = parseExpression(); if (pos < expr.length()) throw new RuntimeException("Unexpected: " + (char)ch); return x; }
+                double parseExpression() { double x = parseTerm(); for (;;) { if (eat('+')) x += parseTerm(); else if (eat('-')) x -= parseTerm(); else return x; } }
+                double parseTerm() { double x = parseFactor(); for (;;) { if (eat('*')) x *= parseFactor(); else if (eat('/')) x /= parseFactor(); else return x; } }
+                double parseFactor() {
+                    if (eat('+')) return parseFactor();
+                    if (eat('-')) return -parseFactor();
+                    double x; int startPos = this.pos;
+                    if (eat('(')) { x = parseExpression(); eat(')'); }
+                    else if ((ch >= '0' && ch <= '9') || ch == '.') { while ((ch >= '0' && ch <= '9') || ch == '.') nextChar(); x = Double.parseDouble(expr.substring(startPos, this.pos)); }
+                    else throw new RuntimeException("Unexpected: " + (char)ch);
+                    return x;
+                }
+            }.parse();
+        } catch (Exception e) { return 0; }
+    }
 
     private void setupDashboardTabs() {
         View btnClients = findViewById(R.id.btnTabClients);

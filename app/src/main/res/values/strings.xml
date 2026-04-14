@@ -29,6 +29,7 @@
     <string name="tab_fournisseurs">FOURNISSEURS</string>
     <string name="label_i_took">J\'ai pris</string>
     <string name="label_i_gave">J\'ai donné</string>
+    <string name="label_historique">Historique</string>
     <string name="label_recouvrement">Recouvrement</string>
     <string name="label_rapports">Rapports</string>
     <string name="hint_search">Recherche</string>
@@ -121,5 +122,24 @@
     <!-- Filtre Screen Strings -->
     <string name="title_filtre">FILTRE</string>
     <string name="label_solde">Soldé</string>
-    <string name="btn_gerer_tags">Gérer les tags</string>
+    <string name="btn_gerer_tags">GÉRER LES TAGS</string>
+    <!-- Caisse and Rapport Strings -->
+    <string name="title_fermer_caisse">Fermer Caisse</string>
+    <string name="title_rapport">RAPPORT</string>
+    <string name="label_resume_session">Résumé de la session</string>
+    <string name="label_solde_text">Solde</string>
+    <string name="btn_fermer_caisse_upper">FERMER LA CAISSE</string>
+    <string name="msg_fermer_caisse_desc">La fermeture de la caisse remettra le solde à zéro et enregistrera cette session dans l\'historique.</string>
+    <string name="tab_apercu">Aperçu</string>
+    <string name="tab_details">Détails</string>
+    <string name="label_encaissement_total">Encaissement total</string>
+    <string name="label_decaissement_total">Décaissement total</string>
+    <string name="btn_telecharger">Télécharger</string>
+    <string name="label_operation_count_format">%1$d Opération</string>
+    <string name="label_operations_count_format">Opérations (%1$d)</string>
+    <string name="amount_format_da">%1$.1f DA</string>
+    <string name="solde_format_da">Solde %1$.1f DA</string>
+    <string name="amount_simple_format">%1$s DA</string>
+    <string name="amount_operator_format">%1$s %2$s </string>
+    <string name="date_format">%1$d/%2$d/%3$d</string>
 </resources>
