@@ -56,6 +56,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etNom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_nom"
@@ -95,6 +96,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -117,27 +119,15 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/btnGoToAddress"
+            <EditText
+                android:id="@+id/etAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_adresse"
+                android:background="@null"
                 android:paddingTop="8dp"
                 android:paddingBottom="12dp"
-                android:clickable="true"
-                android:focusable="true">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hint_adresse"
-                    android:textColor="#BDC3C7"
-                    android:textSize="16sp" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@android:drawable/ic_media_play"
-                    app:tint="#3498DB" />
-            </RelativeLayout>
+                android:textSize="16sp" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
 
             <!-- Tags Section -->

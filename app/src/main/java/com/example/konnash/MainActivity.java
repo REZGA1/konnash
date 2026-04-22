@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
         View btnFilter = findViewById(R.id.btnFilter);
         if (btnFilter != null) btnFilter.setOnClickListener(v -> showFiltre("credit"));
+
+        loadPersons("clients", R.id.clientsContainer, R.id.tvClientsCount, "Clients");
     }
 
     private void showCarnetFournisseurs() {
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         View btnFilter = findViewById(R.id.btnFilter);
         if (btnFilter != null) btnFilter.setOnClickListener(v -> showFiltre("fournisseur"));
+
+        loadPersons("fournisseurs", R.id.fournisseursContainer, R.id.tvFournisseursCount, "Fournisseurs");
     }
 
     private double currentSolde = 0.0;
@@ -282,6 +286,77 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil);
         applyWindowInsets(findViewById(R.id.main_root));
         setupBottomNav();
+        
+        View btnCarteVisite = findViewById(R.id.btnCarteVisite);
+        if (btnCarteVisite != null) {
+            btnCarteVisite.setOnClickListener(v -> showCarteVisite());
+        }
+    }
+
+    private void showCarteVisite() {
+        setContentView(R.layout.activity_carte_visite);
+        applyWindowInsets(findViewById(R.id.main_root));
+
+        findViewById(R.id.btnBack).setOnClickListener(v -> showProfil());
+
+        TextView tvPreviewStore = findViewById(R.id.tvPreviewStore);
+        TextView tvPreviewPhone = findViewById(R.id.tvPreviewPhone);
+
+        android.widget.EditText etCardPhone = findViewById(R.id.etCardPhone);
+        android.widget.EditText etCardName = findViewById(R.id.etCardName);
+        android.widget.EditText etCardStore = findViewById(R.id.etCardStore);
+        android.widget.EditText etCardDesc = findViewById(R.id.etCardDesc);
+        android.widget.EditText etCardAddress = findViewById(R.id.etCardAddress);
+        android.widget.EditText etCardCity = findViewById(R.id.etCardCity);
+
+        // Load data from DB
+        android.database.sqlite.SQLiteDatabase db = com.example.konnash.Database.DatabaseHelper.getInstance(this).getReadableDatabase();
+        android.database.Cursor cursor = db.query("business_card", null, "id=1", null, null, null, null);
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(1);
+            String store = cursor.getString(2);
+            String phone = cursor.getString(3);
+            String desc = cursor.getString(4);
+            String address = cursor.getString(5);
+            String city = cursor.getString(6);
+
+            if (store != null && !store.isEmpty()) { tvPreviewStore.setText(store); etCardStore.setText(store); }
+            if (phone != null && !phone.isEmpty()) { tvPreviewPhone.setText(phone); etCardPhone.setText(phone); }
+            if (name != null) etCardName.setText(name);
+            if (desc != null) etCardDesc.setText(desc);
+            if (address != null) etCardAddress.setText(address);
+            if (city != null) etCardCity.setText(city);
+        }
+        cursor.close();
+
+        View formContainer = findViewById(R.id.formContainer);
+        View btnEdit = findViewById(R.id.btnEdit);
+        View viewActions = findViewById(R.id.viewActions);
+        View editActions = findViewById(R.id.editActions);
+
+        btnEdit.setOnClickListener(v -> {
+            formContainer.setVisibility(View.VISIBLE);
+            btnEdit.setVisibility(View.GONE);
+            viewActions.setVisibility(View.GONE);
+            editActions.setVisibility(View.VISIBLE);
+        });
+
+        findViewById(R.id.btnValider).setOnClickListener(v -> {
+            android.database.sqlite.SQLiteDatabase wDb = com.example.konnash.Database.DatabaseHelper.getInstance(this).getWritableDatabase();
+            android.content.ContentValues values = new android.content.ContentValues();
+            values.put("id", 1);
+            values.put("personal_name", etCardName.getText().toString());
+            values.put("store_name", etCardStore.getText().toString());
+            values.put("phone", etCardPhone.getText().toString());
+            values.put("business_description", etCardDesc.getText().toString());
+            values.put("address", etCardAddress.getText().toString());
+            values.put("city", etCardCity.getText().toString());
+
+            wDb.insertWithOnConflict("business_card", null, values, android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE);
+
+            Toast.makeText(this, "Carte de visite sauvegardée", Toast.LENGTH_SHORT).show();
+            showCarteVisite(); // reload to show updated view
+        });
     }
 
     private void showSortie() {
@@ -314,11 +389,75 @@ public class MainActivity extends AppCompatActivity {
     private void showAjouterClient() {
         setContentView(R.layout.activity_ajouter_client);
         findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetCredit());
+
+        android.widget.EditText etNom = findViewById(R.id.etNom);
+        android.widget.EditText etPhone = findViewById(R.id.etPhone);
+        android.widget.EditText etAddress = findViewById(R.id.etAddress);
+        View btnConfirmer = findViewById(R.id.btnConfirmer);
+
+        if (btnConfirmer != null) {
+            btnConfirmer.setOnClickListener(v -> {
+                String name = etNom != null ? etNom.getText().toString().trim() : "";
+                String phone = etPhone != null ? etPhone.getText().toString().trim() : "";
+                String address = etAddress != null ? etAddress.getText().toString().trim() : "";
+
+                if (name.isEmpty()) {
+                    Toast.makeText(this, "Nom est obligatoire", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!phone.isEmpty() && phone.length() != 9) {
+                    Toast.makeText(this, "Le numéro de téléphone doit contenir 9 chiffres", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                android.database.sqlite.SQLiteDatabase db = com.example.konnash.Database.DatabaseHelper.getInstance(this).getWritableDatabase();
+                android.content.ContentValues values = new android.content.ContentValues();
+                values.put("name", name);
+                values.put("phone", phone);
+                values.put("address", address);
+                db.insert("clients", null, values);
+
+                Toast.makeText(this, "Client ajouté", Toast.LENGTH_SHORT).show();
+                showCarnetCredit();
+            });
+        }
     }
 
     private void showAjouterFournisseur() {
         setContentView(R.layout.activity_ajouter_fournisseur);
         findViewById(R.id.btnBack).setOnClickListener(v -> showCarnetFournisseurs());
+
+        android.widget.EditText etNom = findViewById(R.id.etNom);
+        android.widget.EditText etPhone = findViewById(R.id.etPhone);
+        android.widget.EditText etAddress = findViewById(R.id.etAddress);
+        View btnConfirmer = findViewById(R.id.btnConfirmer);
+
+        if (btnConfirmer != null) {
+            btnConfirmer.setOnClickListener(v -> {
+                String name = etNom != null ? etNom.getText().toString().trim() : "";
+                String phone = etPhone != null ? etPhone.getText().toString().trim() : "";
+                String address = etAddress != null ? etAddress.getText().toString().trim() : "";
+
+                if (name.isEmpty()) {
+                    Toast.makeText(this, "Nom est obligatoire", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!phone.isEmpty() && phone.length() != 9) {
+                    Toast.makeText(this, "Le numéro de téléphone doit contenir 9 chiffres", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                android.database.sqlite.SQLiteDatabase db = com.example.konnash.Database.DatabaseHelper.getInstance(this).getWritableDatabase();
+                android.content.ContentValues values = new android.content.ContentValues();
+                values.put("name", name);
+                values.put("phone", phone);
+                values.put("address", address);
+                db.insert("fournisseurs", null, values);
+
+                Toast.makeText(this, "Fournisseur ajouté", Toast.LENGTH_SHORT).show();
+                showCarnetFournisseurs();
+            });
+        }
     }
 
     private void showCalendar(TextView targetView) {
@@ -437,5 +576,150 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void loadPersons(String table, int containerId, int countTextViewId, String labelPrefix) {
+        LinearLayout container = findViewById(containerId);
+        if (container == null) return;
+        container.removeAllViews();
+        
+        android.database.sqlite.SQLiteDatabase db = com.example.konnash.Database.DatabaseHelper.getInstance(this).getReadableDatabase();
+        android.database.Cursor cursor = db.query(table, new String[]{"name", "phone"}, null, null, null, null, "id DESC");
+        
+        int count = 0;
+        while (cursor.moveToNext()) {
+            count++;
+            String name = cursor.getString(0);
+            String phone = cursor.getString(1);
+            
+            LinearLayout itemLayout = new LinearLayout(this);
+            itemLayout.setOrientation(LinearLayout.HORIZONTAL);
+            itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            itemLayout.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+            itemLayout.setGravity(android.view.Gravity.CENTER_VERTICAL);
+            
+            TextView tvIcon = new TextView(this);
+            tvIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(45), dpToPx(45)));
+            tvIcon.setBackgroundResource(R.drawable.bg_light_blue_btn);
+            tvIcon.setGravity(android.view.Gravity.CENTER);
+            tvIcon.setText(name.length() > 0 ? name.substring(0, 1).toUpperCase() : "U");
+            tvIcon.setTextColor(0xFF333333);
+            tvIcon.setTypeface(null, android.graphics.Typeface.BOLD);
+            
+            LinearLayout centerLayout = new LinearLayout(this);
+            centerLayout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+            params.setMargins(dpToPx(16), 0, 0, 0);
+            centerLayout.setLayoutParams(params);
+            
+            TextView tvName = new TextView(this);
+            tvName.setText(name);
+            tvName.setTextColor(0xFF333333);
+            tvName.setTypeface(null, android.graphics.Typeface.BOLD);
+            
+            TextView tvSubtitle = new TextView(this);
+            tvSubtitle.setText("Aujourd'hui" + (phone.isEmpty() ? "" : " - " + phone));
+            tvSubtitle.setTextSize(12);
+            tvSubtitle.setTextColor(0xFFBDC3C7);
+            
+            centerLayout.addView(tvName);
+            centerLayout.addView(tvSubtitle);
+            
+            LinearLayout rightLayout = new LinearLayout(this);
+            rightLayout.setOrientation(LinearLayout.VERTICAL);
+            rightLayout.setGravity(android.view.Gravity.END);
+            
+            TextView tvAmount = new TextView(this);
+            tvAmount.setText("0.0 DA");
+            tvAmount.setTextColor(0xFFE74C3C);
+            tvAmount.setTypeface(null, android.graphics.Typeface.BOLD);
+            
+            TextView tvGive = new TextView(this);
+            tvGive.setText("J'ai donné");
+            tvGive.setTextSize(10);
+            tvGive.setTextColor(0xFFBDC3C7);
+            
+            rightLayout.addView(tvAmount);
+            rightLayout.addView(tvGive);
+            
+            itemLayout.addView(tvIcon);
+            itemLayout.addView(centerLayout);
+            itemLayout.addView(rightLayout);
+            
+            final String finalName = name;
+            itemLayout.setOnClickListener(v -> showClientDetails(finalName, table.equals("fournisseurs")));
+            
+            container.addView(itemLayout);
+            
+            View separator = new View(this);
+            separator.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpToPx(1)));
+            separator.setBackgroundColor(0xFFEEEEEE);
+            container.addView(separator);
+        }
+        cursor.close();
+        
+        TextView tvCount = findViewById(countTextViewId);
+        if (tvCount != null) {
+            tvCount.setText(labelPrefix + " (" + count + ")");
+        }
+    }
+    
+    private int dpToPx(int dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density);
+    }
+    
+    private void showClientDetails(String name, boolean isFournisseur) {
+        setContentView(R.layout.activity_client_details);
+        applyWindowInsets(findViewById(R.id.main_root)); // Wait, does activity_client_details have main_root? No, we can skip or use a null-safe method.
+        
+        TextView tvClientName = findViewById(R.id.tvClientName);
+        if (tvClientName != null) {
+            tvClientName.setText(name);
+        }
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> {
+                if (isFournisseur) {
+                    showCarnetFournisseurs();
+                } else {
+                    showCarnetCredit();
+                }
+            });
+        }
+
+        View btnTook = findViewById(R.id.btnTook);
+        if (btnTook != null) {
+            btnTook.setOnClickListener(v -> showCalculator(name, isFournisseur, true));
+        }
+
+        View btnGave = findViewById(R.id.btnGave);
+        if (btnGave != null) {
+            btnGave.setOnClickListener(v -> showCalculator(name, isFournisseur, false));
+        }
+    }
+
+    private void showCalculator(String name, boolean isFournisseur, boolean isTook) {
+        if (isTook) {
+            setContentView(R.layout.activity_calculator_pris);
+        } else {
+            setContentView(R.layout.activity_calculator_donne);
+        }
+
+        TextView tvClientName = findViewById(R.id.tvClientName);
+        if (tvClientName != null) {
+            tvClientName.setText(name);
+        }
+
+        View btnBack = findViewById(R.id.btnBack);
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> showClientDetails(name, isFournisseur));
+        }
+        
+        View btnTerminer = findViewById(R.id.btnTerminer);
+        if (btnTerminer != null) {
+            btnTerminer.setOnClickListener(v -> showClientDetails(name, isFournisseur));
+        }
     }
 }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="#3498DB" />
+        <TextView
+            android:id="@+id/tvClientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="MOHAMED"
+            android:textColor="#3498DB"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAllCaps="true" />
+    </RelativeLayout>
+
+    <!-- Display -->
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:text="0,00 DA"
+        android:textColor="#2ECC71"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="top|start" />
+
+    <!-- Terminer Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTerminer"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape_global"
+        android:backgroundTint="#D5F5E3"
+        android:text="TERMINER"
+        android:textColor="#27AE60"
+        android:textStyle="bold" />
+
+    <!-- Calculator Grid -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+        
+        <!-- Row 1 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:orientation="horizontal" android:weightSum="4">
+            <TextView android:text="AC" android:textColor="#3498DB" android:textSize="18sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+            <TextView android:text="M+" android:textColor="#3498DB" android:textSize="18sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+            <TextView android:text="M-" android:textColor="#3498DB" android:textSize="18sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+            <ImageView android:src="@android:drawable/ic_input_delete" app:tint="#3498DB" android:scaleType="centerInside" android:padding="12dp" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+        </LinearLayout>
+        
+        <!-- Row 2 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:orientation="horizontal" android:weightSum="4">
+            <TextView android:text="7" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="8" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="9" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="horizontal" android:weightSum="2">
+                <TextView android:text="/" android:textColor="#3498DB" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+                <TextView android:text="%" android:textColor="#3498DB" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+            </LinearLayout>
+        </LinearLayout>
+        
+        <!-- Row 3 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:orientation="horizontal" android:weightSum="4">
+            <TextView android:text="4" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="5" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="6" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="x" android:textColor="#3498DB" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+        </LinearLayout>
+        
+        <!-- Row 4 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:orientation="horizontal" android:weightSum="4">
+            <TextView android:text="1" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="2" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="3" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="-" android:textColor="#3498DB" android:textSize="24sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+        </LinearLayout>
+        
+        <!-- Row 5 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:orientation="horizontal" android:weightSum="4">
+            <TextView android:text="0" android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="." android:textColor="#333333" android:textSize="20sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_number" />
+            <TextView android:text="=" android:textColor="#3498DB" android:textSize="24sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+            <TextView android:text="+" android:textColor="#3498DB" android:textSize="24sp" android:gravity="center" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_margin="4dp" android:background="@drawable/calc_btn_operator" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

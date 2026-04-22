@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME    = "konnash.db";
-    private static final int    DB_VERSION = 1;
+    private static final int    DB_VERSION = 5;
 
     private static DatabaseHelper instance;
 
@@ -82,9 +82,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "CREATE TABLE categories (" +
                         "id   INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "name TEXT NOT NULL UNIQUE)"  // UNIQUE لمنع تكرار نفس الفئة
+                        "name TEXT NOT NULL UNIQUE)"
         );
 
+        db.execSQL(
+                "CREATE TABLE clients (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "name TEXT NOT NULL," +
+                        "phone TEXT," +
+                        "address TEXT)"
+        );
+
+        db.execSQL(
+                "CREATE TABLE fournisseurs (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "name TEXT NOT NULL," +
+                        "phone TEXT," +
+                        "address TEXT)"
+        );
     }
 
     @Override
@@ -95,6 +110,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS app_settings");
         db.execSQL("DROP TABLE IF EXISTS user_profile");
         db.execSQL("DROP TABLE IF EXISTS categories");
+        db.execSQL("DROP TABLE IF EXISTS clients");
+        db.execSQL("DROP TABLE IF EXISTS fournisseurs");
         onCreate(db);
     }
 }

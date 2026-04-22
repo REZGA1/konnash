@@ -163,7 +163,7 @@
         android:paddingRight="16dp"
         android:orientation="vertical">
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_clients_count" android:textColor="#3498DB" android:textStyle="bold" />
+        <TextView android:id="@+id/tvClientsCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_clients_count" android:textColor="#3498DB" android:textStyle="bold" />
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp" android:gravity="center_vertical">
             <EditText
@@ -196,36 +196,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Placeholder Item -->
-    <LinearLayout
+    <!-- Clients List Container -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/search_section"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:layout_above="@id/bottom_navigation"
+        android:layout_marginTop="16dp">
+        <LinearLayout
+            android:id="@+id/clientsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="80dp" />
+    </ScrollView>
 
-        <TextView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/bg_light_blue_btn"
-            android:gravity="center"
-            android:text="M"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:importantForAccessibility="no"
-            tools:ignore="HardcodedText" />
-
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:orientation="vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mohamed Bbay" android:textColor="#333333" android:textStyle="bold" tools:ignore="HardcodedText" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aujourd'hui" android:textSize="12sp" android:textColor="#BDC3C7" tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="end" android:orientation="vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6.0 DA" android:textColor="#E74C3C" android:textStyle="bold" tools:ignore="HardcodedText" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="J'ai donné" android:textSize="10sp" android:textColor="#BDC3C7" tools:ignore="HardcodedText" />
-        </LinearLayout>
-    </LinearLayout>
 
     <!-- Floating Action Button -->
     <androidx.appcompat.widget.AppCompatButton
