@@ -46,17 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         db.execSQL(
-                "CREATE TABLE business_card (" +
-                        "id                   INTEGER PRIMARY KEY CHECK(id = 1)," +
-                        "personal_name        TEXT," +
-                        "store_name           TEXT," +
-                        "phone                TEXT," +
-                        "business_description TEXT," +
-                        "address              TEXT," +
-                        "city                 TEXT)"
-        );
-
-        db.execSQL(
                 "CREATE TABLE transaction_archives (" +
                         "id         INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "open_date  INTEGER NOT NULL," +
@@ -93,25 +82,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "address TEXT)"
         );
 
-        db.execSQL(
-                "CREATE TABLE fournisseurs (" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "name TEXT NOT NULL," +
-                        "phone TEXT," +
-                        "address TEXT)"
-        );
+        // Tags table
+        db.execSQL("CREATE TABLE IF NOT EXISTS tags (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT UNIQUE," +
+                "color TEXT," +
+                "client_count INTEGER DEFAULT 0," +
+                "fournisseur_count INTEGER DEFAULT 0)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS transactions");
         db.execSQL("DROP TABLE IF EXISTS transaction_archives");
-        db.execSQL("DROP TABLE IF EXISTS business_card");
         db.execSQL("DROP TABLE IF EXISTS app_settings");
         db.execSQL("DROP TABLE IF EXISTS user_profile");
         db.execSQL("DROP TABLE IF EXISTS categories");
         db.execSQL("DROP TABLE IF EXISTS clients");
-        db.execSQL("DROP TABLE IF EXISTS fournisseurs");
+        db.execSQL("DROP TABLE IF EXISTS tags");
         onCreate(db);
     }
 }

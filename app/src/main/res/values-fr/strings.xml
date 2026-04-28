@@ -1,0 +1,145 @@
+<resources>
+    <!-- language selection screen Strings -->
+    <string name="app_name">Konnash</string>
+    <string name="image_description">Online status indicator</string>
+    <string name="button_text">Button</string>
+    <string name="button2_text">Button 2</string>
+    <string name="button3_text">Button 3</string>
+    <string name="app_logo_description">Konnash Logo</string>
+    <string name="lang_turkish">Turc</string>
+    <string name="lang_english">Anglais</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_arabic">Arabe</string>
+
+    <!-- Complete Info Screen Strings -->
+    <string name="complete_info_title">Veuillez compléter vos\ninformations</string>
+    <string name="label_point_of_sale">NOM DU POINT DE VENTE</string>
+    <string name="hint_point_of_sale">Nom de point de vente</string>
+    <string name="btn_validate">VALIDER</string>
+
+    <!-- Carnet Credit Screen Strings -->
+    <string name="shop_name">Mon Magasin</string>
+    <string name="home_description">Ici, vous pouvez enregistrer tous les crédits et les avoirs de vos clients et fournisseurs</string>
+    <string name="btn_add_client">Ajouter client</string>
+    <string name="btn_add_supplier">Ajouter fournisseur</string>
+    <string name="nav_carnet_credit">Carnet Crédit</string>
+    <string name="nav_carnet_caisse">Carnet Caisse</string>
+    <string name="nav_profil">Profil</string>
+    <string name="tab_clients">CLIENTS</string>
+    <string name="tab_fournisseurs">FOURNISSEURS</string>
+    <string name="label_i_took">J\'ai pris</string>
+    <string name="label_i_gave">J\'ai donné</string>
+    <string name="label_historique">Historique</string>
+    <string name="label_recouvrement">Recouvrement</string>
+    <string name="label_rapports">Rapports</string>
+    <string name="hint_search">Recherche</string>
+    <string name="label_clients_count">Clients (1)</string>
+    <string name="label_fournisseurs_count">Fournisseurs (0)</string>
+    <string name="no_fournisseur_msg">Aucun fournisseur pour\nle moment. Ajoutez des\nfournisseurs</string>
+
+    <!-- Carnet Caisse Dashboard Strings -->
+    <string name="caisse_dashboard_description">Ici, vous pouvez enregistrer toutes vos entrées et dépenses</string>
+    <string name="btn_entree">ENTRÉE</string>
+    <string name="btn_sortie">SORTIE</string>
+
+    <!-- Ajouter Client/Fournisseur Strings -->
+    <string name="title_ajouter_client">AJOUTER CLIENT</string>
+    <string name="title_ajouter_fournisseur">AJOUTER FOURNISSEUR</string>
+    <string name="label_nom">NOM</string>
+    <string name="hint_nom">Nom</string>
+    <string name="label_phone">NUMÉRO DE TÉLÉPHONE</string>
+    <string name="hint_phone">Numéro de téléphone</string>
+    <string name="label_adresse">ADRESSE</string>
+    <string name="hint_adresse">Adresse</string>
+    <string name="label_tags">Tags</string>
+    <string name="btn_ajouter_tags">Ajouter tags</string>
+    <string name="tags_desc">Utilisez des tags personnalisés (ex. : VIP, Grossiste, Région) pour classer vos contacts et les filtrer facilement</string>
+    <string name="btn_confirmer">CONFIRMER</string>
+
+    <!-- Adresse Screen Strings -->
+    <string name="title_adresse">ADRESSE</string>
+    <string name="label_ville">VILLE</string>
+    <string name="hint_ville">Ville</string>
+    <string name="label_pays">PAYS</string>
+    <string name="hint_pays">Pays</string>
+
+    <!-- Tags Screen Strings -->
+    <string name="title_gerer_tags">GÉRER LES TAGS</string>
+    <string name="btn_nouveau_tag">AJOUTER UN NOUVEAU TAG</string>
+    <string name="empty_tags_msg">Aucun tag client, créez votre premier tag</string>
+
+    <!-- Profil Screen Strings -->
+    <string name="profil_title">Profil</string>
+    <string name="invite_friends">Invitez vos amis</string>
+    <string name="menu_carte_visite">Carte de visite</string>
+    <string name="menu_inventaire">Inventaire et Personnel</string>
+    <string name="menu_configuration">Configuration</string>
+    <string name="menu_sauvegarde">Sauvegarde</string>
+    <string name="menu_contact">Contactez nous</string>
+    <string name="about_app">A propos de Konnash</string>
+    <string name="app_version">Version 2.18.12-prod</string>
+    <string name="legal_text">Conditions d\'utilisation-Politique de confidentialité</string>
+
+    <!-- Entree/Sortie Screen Strings -->
+    <string name="label_entree">Entrée</string>
+    <string name="label_sortie">Sortie</string>
+    <string name="default_amount">0,00 DA</string>
+
+    <!-- Rapport Screen Strings -->
+    <string name="title_rapports">RAPPORTS</string>
+    <string name="label_all_dates">Toutes les dates</string>
+    <string name="btn_modify_period">Modifier période</string>
+    <string name="label_net_balance">Balance nette</string>
+    <string name="label_operations_count">Opérations (1, Actif)</string>
+    <string name="hint_search_transactions">Rechercher dans 1 transaction</string>
+    <string name="btn_download">TÉLÉCHARGER</string>
+
+    <!-- Periode Rapport Strings -->
+    <string name="title_periode_rapport">PÉRIODE RAPPORT</string>
+    <string name="label_custom_date">Date personnalisée</string>
+    <string name="label_start_date">Date de début</string>
+    <string name="label_end_date">Date de fin</string>
+    <string name="label_today">Aujourd\'hui</string>
+    <string name="label_yesterday">Hier</string>
+    <string name="label_this_week">Cette semaine</string>
+    <string name="label_last_week">Semaine dernière</string>
+    <string name="label_current_month">Mois en cours</string>
+    <string name="btn_apply">APPLIQUER</string>
+
+    <!-- Tri Screen Strings -->
+    <string name="title_sort_by">TRIER SELON</string>
+    <string name="label_filter_by">Filtrer par</string>
+    <string name="label_sort_by">Trier selon</string>
+    <string name="filter_all">Tout</string>
+    <string name="filter_active">Actif</string>
+    <string name="filter_archived">Archivé</string>
+    <string name="sort_recent">Transactions récentes</string>
+    <string name="sort_old">Transactions anciennes</string>
+    <string name="sort_amount_asc">Montant croissant</string>
+    <string name="sort_amount_desc">Montant décroissant</string>
+    <string name="sort_alpha">Alphabétique</string>
+
+    <!-- Filtre Screen Strings -->
+    <string name="title_filtre">FILTRE</string>
+    <string name="label_solde">Soldé</string>
+    <string name="btn_gerer_tags">GÉRER LES TAGS</string>
+    <!-- Caisse and Rapport Strings -->
+    <string name="title_fermer_caisse">Fermer Caisse</string>
+    <string name="title_rapport">RAPPORT</string>
+    <string name="label_resume_session">Résumé de la session</string>
+    <string name="label_solde_text">Solde</string>
+    <string name="btn_fermer_caisse_upper">FERMER LA CAISSE</string>
+    <string name="msg_fermer_caisse_desc">La fermeture de la caisse remettra le solde à zéro et enregistrera cette session dans l\'historique.</string>
+    <string name="tab_apercu">Aperçu</string>
+    <string name="tab_details">Détails</string>
+    <string name="label_encaissement_total">Encaissement total</string>
+    <string name="label_decaissement_total">Décaissement total</string>
+    <string name="btn_telecharger">Télécharger</string>
+    <string name="label_operation_count_format">%1$d Opération</string>
+    <string name="label_operations_count_format">Opérations (%1$d)</string>
+    <string name="amount_format_da">%1$.1f DA</string>
+    <string name="solde_format_da">Solde %1$.1f DA</string>
+    <string name="amount_simple_format">%1$s DA</string>
+    <string name="amount_operator_format">%1$s %2$s </string>
+    <string name="date_format">%1$d/%2$d/%3$d</string>
+</resources>

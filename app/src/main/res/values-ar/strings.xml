@@ -1,0 +1,145 @@
+<resources>
+    <!-- language selection screen Strings -->
+    <string name="app_name">كناش</string>
+    <string name="image_description">مؤشر الحالة</string>
+    <string name="button_text">زر</string>
+    <string name="button2_text">زر 2</string>
+    <string name="button3_text">زر 3</string>
+    <string name="app_logo_description">شعار كناش</string>
+    <string name="lang_turkish">Türkçe</string>
+    <string name="lang_english">English</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_arabic">العربية</string>
+
+    <!-- Complete Info Screen Strings -->
+    <string name="complete_info_title">يرجى إكمال\nمعلوماتك</string>
+    <string name="label_point_of_sale">اسم نقطة البيع</string>
+    <string name="hint_point_of_sale">اسم نقطة البيع</string>
+    <string name="btn_validate">تأكيد</string>
+
+    <!-- Carnet Credit Screen Strings -->
+    <string name="shop_name">متجري</string>
+    <string name="home_description">هنا يمكنك تسجيل جميع الائتمانات والمدفوعات لعملائك والموردين</string>
+    <string name="btn_add_client">إضافة عميل</string>
+    <string name="btn_add_supplier">إضافة مورد</string>
+    <string name="nav_carnet_credit">دفتر الائتمان</string>
+    <string name="nav_carnet_caisse">الصندوق</string>
+    <string name="nav_profil">الملف الشخصي</string>
+    <string name="tab_clients">العملاء</string>
+    <string name="tab_fournisseurs">الموردون</string>
+    <string name="label_i_took">أخذت</string>
+    <string name="label_i_gave">أعطيت</string>
+    <string name="label_historique">التاريخ</string>
+    <string name="label_recouvrement">التحصيل</string>
+    <string name="label_rapports">التقارير</string>
+    <string name="hint_search">بحث</string>
+    <string name="label_clients_count">العملاء (1)</string>
+    <string name="label_fournisseurs_count">الموردون (0)</string>
+    <string name="no_fournisseur_msg">لا يوجد موردون حالياً. أضف موردين</string>
+
+    <!-- Carnet Caisse Dashboard Strings -->
+    <string name="caisse_dashboard_description">هنا يمكنك تسجيل جميع إيراداتك ونفقاتك</string>
+    <string name="btn_entree">إيراد</string>
+    <string name="btn_sortie">مصروف</string>
+
+    <!-- Ajouter Client/Fournisseur Strings -->
+    <string name="title_ajouter_client">إضافة عميل</string>
+    <string name="title_ajouter_fournisseur">إضافة مورد</string>
+    <string name="label_nom">الاسم</string>
+    <string name="hint_nom">الاسم</string>
+    <string name="label_phone">رقم الهاتف</string>
+    <string name="hint_phone">رقم الهاتف</string>
+    <string name="label_adresse">العنوان</string>
+    <string name="hint_adresse">العنوان</string>
+    <string name="label_tags">الوسوم</string>
+    <string name="btn_ajouter_tags">إضافة وسوم</string>
+    <string name="tags_desc">استخدم وسوم مخصصة (مثال: VIP، جملة، منطقة) لتصنيف جهات الاتصال وتصفيتها بسهولة</string>
+    <string name="btn_confirmer">تأكيد</string>
+
+    <!-- Adresse Screen Strings -->
+    <string name="title_adresse">العنوان</string>
+    <string name="label_ville">المدينة</string>
+    <string name="hint_ville">المدينة</string>
+    <string name="label_pays">البلد</string>
+    <string name="hint_pays">البلد</string>
+
+    <!-- Tags Screen Strings -->
+    <string name="title_gerer_tags">إدارة الوسوم</string>
+    <string name="btn_nouveau_tag">إضافة وسم جديد</string>
+    <string name="empty_tags_msg">لا يوجد وسوم عملاء، أنشئ وسمك الأول</string>
+
+    <!-- Profil Screen Strings -->
+    <string name="profil_title">الملف الشخصي</string>
+    <string name="invite_friends">ادعُ أصدقاء</string>
+    <string name="menu_carte_visite">بطاقة الأعمال</string>
+    <string name="menu_inventaire">المخزون والموظفون</string>
+    <string name="menu_configuration">الإعدادات</string>
+    <string name="menu_sauvegarde">النسخ الاحتياطي</string>
+    <string name="menu_contact">اتصل بنا</string>
+    <string name="about_app">عن تطبيق كناش</string>
+    <string name="app_version">الإصدار 2.18.12-prod</string>
+    <string name="legal_text">شروط الاستخدام - سياسة الخصوصية</string>
+
+    <!-- Entree/Sortie Screen Strings -->
+    <string name="label_entree">إيراد</string>
+    <string name="label_sortie">مصروف</string>
+    <string name="default_amount">0,00 د.ج</string>
+
+    <!-- Rapport Screen Strings -->
+    <string name="title_rapports">التقارير</string>
+    <string name="label_all_dates">جميع التواريخ</string>
+    <string name="btn_modify_period">تعديل الفترة</string>
+    <string name="label_net_balance">الرصيد الصافي</string>
+    <string name="label_operations_count">العمليات (1، نشط)</string>
+    <string name="hint_search_transactions">البحث في 1 معاملة</string>
+    <string name="btn_download">تحميل</string>
+
+    <!-- Periode Rapport Strings -->
+    <string name="title_periode_rapport">فترة التقرير</string>
+    <string name="label_custom_date">تاريخ مخصص</string>
+    <string name="label_start_date">تاريخ البدء</string>
+    <string name="label_end_date">تاريخ الانتهاء</string>
+    <string name="label_today">اليوم</string>
+    <string name="label_yesterday">أمس</string>
+    <string name="label_this_week">هذا الأسبوع</string>
+    <string name="label_last_week">الأسبوع الماضي</string>
+    <string name="label_current_month">الشهر الحالي</string>
+    <string name="btn_apply">تطبيق</string>
+
+    <!-- Tri Screen Strings -->
+    <string name="title_sort_by">الترتيب حسب</string>
+    <string name="label_filter_by">تصفية حسب</string>
+    <string name="label_sort_by">الترتيب حسب</string>
+    <string name="filter_all">الكل</string>
+    <string name="filter_active">نشط</string>
+    <string name="filter_archived">مؤرشف</string>
+    <string name="sort_recent">المعاملات الأخيرة</string>
+    <string name="sort_old">المعاملات القديمة</string>
+    <string name="sort_amount_asc">المبلغ تصاعدياً</string>
+    <string name="sort_amount_desc">المبلغ تنازلياً</string>
+    <string name="sort_alpha">أبجدياً</string>
+
+    <!-- Filtre Screen Strings -->
+    <string name="title_filtre">تصفية</string>
+    <string name="label_solde">مسدد</string>
+    <string name="btn_gerer_tags">إدارة الوسوم</string>
+    <!-- Caisse and Rapport Strings -->
+    <string name="title_fermer_caisse">إغلاق الصندوق</string>
+    <string name="title_rapport">تقرير</string>
+    <string name="label_resume_session">ملخص الجلسة</string>
+    <string name="label_solde_text">الرصيد</string>
+    <string name="btn_fermer_caisse_upper">إغلاق الصندوق</string>
+    <string name="msg_fermer_caisse_desc">إغلاق الصندوق سيؤدي إلى إعادة الرصيد إلى الصفر وتسجيل هذه الجلسة في السجل.</string>
+    <string name="tab_apercu">نظرة عامة</string>
+    <string name="tab_details">التفاصيل</string>
+    <string name="label_encaissement_total">التحصيل الكلي</string>
+    <string name="label_decaissement_total">الصرف الكلي</string>
+    <string name="btn_telecharger">تحميل</string>
+    <string name="label_operation_count_format">%1$d عملية</string>
+    <string name="label_operations_count_format">العمليات (%1$d)</string>
+    <string name="amount_format_da">%1$.1f د.ج</string>
+    <string name="solde_format_da">الرصيد %1$.1f د.ج</string>
+    <string name="amount_simple_format">%1$s د.ج</string>
+    <string name="amount_operator_format">%1$s %2$s </string>
+    <string name="date_format">%1$d/%2$d/%3$d</string>
+</resources>

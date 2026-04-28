@@ -27,6 +27,7 @@
             android:src="@drawable/book_icon" />
 
         <TextView
+            android:id="@+id/tvShopName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -115,7 +116,8 @@
                 android:textAllCaps="true"
                 android:textColor="#C62828"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false" />
         </LinearLayout>
     </LinearLayout>
 

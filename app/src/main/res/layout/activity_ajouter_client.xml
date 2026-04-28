@@ -104,7 +104,7 @@
             </LinearLayout>
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
 
-            <!-- Address Input -->
+            <!-- Address Input - Dropdown Style -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,15 +114,36 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etAddress"
+            <RelativeLayout
+                android:id="@+id/rlAddressDropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_adresse"
-                android:background="@null"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
                 android:paddingTop="8dp"
-                android:paddingBottom="12dp"
-                android:textSize="16sp" />
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/ivAddressArrow"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/hint_adresse"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivAddressArrow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:rotation="90"
+                    app:tint="#3498DB" />
+            </RelativeLayout>
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
 
             <!-- Tags Section -->

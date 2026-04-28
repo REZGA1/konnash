@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Sortie Screen
-    Includes a large amount display (red) and a dark Valider button.
+    Sortie Screen (Static - no functionality)
+    This screen is no longer used but kept for reference
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -69,7 +69,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <!-- VALIDER Button (Dark style for Sortie) -->
+        <!-- VALIDER Button -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnValider"
             android:layout_width="match_parent"
@@ -77,45 +77,49 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_dark_purple_btn"
+            android:background="@drawable/bg_light_red_btn"
             android:text="@string/btn_validate"
-            android:textColor="#E74C3C"
+            android:textColor="#C62828"
             android:textStyle="bold" />
 
         <!-- Keypad -->
         <GridLayout
+            android:id="@+id/calculatorKeypad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="4"
             android:padding="4dp"
             android:background="#F8F9FA">
 
+            <!-- Row 1 -->
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="AC" android:textColor="#3498DB" android:textSize="18sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="M+" android:textColor="#3498DB" android:textSize="18sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="M-" android:textColor="#3498DB" android:textSize="18sp" />
-            <ImageView android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:padding="20dp" android:src="@android:drawable/ic_menu_close_clear_cancel" app:tint="#3498DB" android:scaleType="centerInside" android:contentDescription="@null" />
+            <ImageView android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:padding="20dp" android:src="@android:drawable/ic_menu_close_clear_cancel" app:tint="#3498DB" android:scaleType="centerInside" />
 
+            <!-- Row 2 -->
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="7" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="8" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="9" android:textColor="#333333" android:textSize="20sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="/" android:textColor="#3498DB" android:textSize="24sp" />
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="/" android:textColor="#3498DB" android:textSize="18sp" />
 
+            <!-- Row 3 -->
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="4" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="5" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="6" android:textColor="#333333" android:textSize="20sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="×" android:textColor="#3498DB" android:textSize="24sp" />
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="×" android:textColor="#3498DB" android:textSize="18sp" />
 
+            <!-- Row 4 -->
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="1" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="2" android:textColor="#333333" android:textSize="20sp" />
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="3" android:textColor="#333333" android:textSize="20sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="-" android:textColor="#3498DB" android:textSize="24sp" />
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="-" android:textColor="#3498DB" android:textSize="18sp" />
 
+            <!-- Row 5 -->
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="0" android:textColor="#333333" android:textSize="20sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="." android:textColor="#333333" android:textSize="24sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="=" android:textColor="#3498DB" android:textSize="24sp" />
-            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="+" android:textColor="#3498DB" android:textSize="24sp" />
-
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:text="." android:textColor="#333333" android:textSize="20sp" />
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="=" android:textColor="#3498DB" android:textSize="18sp" />
+            <Button style="?android:attr/borderlessButtonStyle" android:layout_width="0dp" android:layout_height="65dp" android:layout_columnWeight="1" android:layout_margin="2dp" android:background="@drawable/bg_light_blue_btn" android:text="+" android:textColor="#3498DB" android:textSize="18sp" />
         </GridLayout>
     </LinearLayout>
-
 </RelativeLayout>
