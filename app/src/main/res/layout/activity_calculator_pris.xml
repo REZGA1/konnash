@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:layoutDirection="ltr">
 
     <!-- Header -->
     <RelativeLayout
@@ -41,7 +42,8 @@
         android:textColor="#2ECC71"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:gravity="top|start" />
+        android:gravity="top|start"
+        android:textDirection="ltr" />
 
     <!-- Terminer Button -->
     <androidx.appcompat.widget.AppCompatButton

@@ -1,15 +1,48 @@
+# --- Android / Gradle ---
+.gradle/
+**/build/
+local.properties
+gradle.properties
+
+# --- Android Studio / IntelliJ ---
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+*.ipr
+*.iws
+.idea/misc.xml
+.idea/deploymentTargetDropDown.xml
+.idea/render.experimental.xml
+
+# --- VS Code ---
+.vscode/
+*.code-workspace
+
+# --- macOS / Windows ---
 .DS_Store
-/build
+Thumbs.db
+desktop.ini
+
+# --- Log files ---
+*.log
+
+# --- Android captures & native ---
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+
+# --- Signing & Keystores ---
+*.jks
+*.keystore
+.signing/
+
+# --- Output files ---
+*.apk
+*.aab
+*.ap_
+output.json
+
+# --- Temporary files ---
+*.swp
+*.tmp
+*~
+

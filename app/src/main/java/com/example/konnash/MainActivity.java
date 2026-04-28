@@ -247,13 +247,14 @@ public class MainActivity extends AppCompatActivity {
         android.widget.TextView tvAddress = findViewById(R.id.tvAddress);
         View rlAddressDropdown = findViewById(R.id.rlAddressDropdown);
         View btnConfirmer = findViewById(R.id.btnConfirmer);
-        View btnGererTags = findViewById(R.id.btnGererTags);
+        // View btnGererTags = findViewById(R.id.btnGererTags); // TODO: Add btnGererTags to layout
         
         // Restore temporary data
         if (etNom != null) etNom.setText(tempClientName);
         if (etPhone != null) etPhone.setText(tempClientPhone);
         if (tvAddress != null) tvAddress.setText(tempClientAddress.isEmpty() ? "" : tempClientAddress);
         
+        /* TODO: Add btnGererTags to layout first
         // Handle Gérer les tags button
         if (btnGererTags != null) {
             btnGererTags.setOnClickListener(v -> {
@@ -263,9 +264,10 @@ public class MainActivity extends AppCompatActivity {
                 showGererTags();
             });
         }
+        */
         
         // Display selected tags in the form
-        displaySelectedTags();
+        // displaySelectedTags(); // TODO: Re-enable when btnGererTags is added
         
         // Make address dropdown clickable - navigate to address screen
         if (rlAddressDropdown != null) {
@@ -525,48 +527,15 @@ public class MainActivity extends AppCompatActivity {
         }
         applyWindowInsets(findViewById(R.id.main_root));
 
-    View btnFilter = findViewById(R.id.btnFilter);
-    if (btnFilter != null) btnFilter.setOnClickListener(v -> showFiltre("credit"));
+        View btnFilter = findViewById(R.id.btnFilter);
+        if (btnFilter != null) btnFilter.setOnClickListener(v -> showFiltre("credit"));
 
-    loadPersons("clients", R.id.clientsContainer, R.id.tvClientsCount, "Clients");
-}
-
-private double currentSolde = 0.0;
-
-private void showCarnetCaisse() {
-    if (currentSolde != 0) {
-        setContentView(R.layout.activity_carnet_caisse_data);
-    } else {
-        setContentView(R.layout.activity_carnet_caisse);
-    }
-    applyWindowInsets(findViewById(R.id.main_root));
-    setupBottomNav();
-
-    // Load and display the saved store name
-    TextView tvShopName = findViewById(R.id.tvShopName);
-    if (tvShopName != null) {
-        UserProfileDAO userDAO = new UserProfileDAO(this);
-        UserProfile profile = userDAO.get();
-        if (profile != null && profile.getStoreName() != null && !profile.getStoreName().isEmpty()) {
-            tvShopName.setText(profile.getStoreName());
-        } else {
-            tvShopName.setText(R.string.shop_name);
-        }
-    }
-
-    TextView tvSolde = findViewById(R.id.tvTotalSolde);
-    if (tvSolde != null) tvSolde.setText(getString(R.string.amount_format_da, currentSolde));
-        // Carte de visite feature removed
+        loadPersons("clients", R.id.clientsContainer, R.id.tvClientsCount, "Clients");
     }
 
     private void showFiltre(String source) {
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year1, monthOfYear, dayOfMonth) -> targetView.setText(getString(R.string.date_format, dayOfMonth, (monthOfYear + 1), year1)),
-                year, month, day);
-        datePickerDialog.show();
+        // TODO: Implement date filter functionality
+        Toast.makeText(this, "Filtre: " + source, Toast.LENGTH_SHORT).show();
     }
 
     // --- Helpers ---
@@ -786,156 +755,31 @@ private void showCarnetCaisse() {
         }
     }
 
+    private void showEntree() {
+        // TODO: Implement entry screen
+        Toast.makeText(this, "Entrée", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showFermerCaisse() {
+        // TODO: Implement close cash register screen
+        Toast.makeText(this, "Fermer Caisse", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showEntreeDetail() {
+        // TODO: Implement entry detail screen
+        Toast.makeText(this, "Détail Entrée", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showProfil() {
+        // TODO: Implement profile screen
+        Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+    }
+
     private void showClientDetails(String name, boolean isFournisseur) {
-        setContentView(R.layout.activity_client_details);
-        applyWindowInsets(findViewById(R.id.main_root)); // Wait, does activity_client_details have main_root? No, we can skip or use a null-safe method.
-        
-        TextView tvClientName = findViewById(R.id.tvClientName);
-        if (tvClientName != null) {
-            tvClientName.setText(name);
-        }
-
-private void setupBottomNav() {
-    View nav = findViewById(R.id.bottom_navigation);
-    if (nav instanceof LinearLayout) {
-        LinearLayout navLayout = (LinearLayout) nav;
-        navLayout.getChildAt(0).setOnClickListener(v -> showCarnetCredit());
-        navLayout.getChildAt(1).setOnClickListener(v -> showCarnetCaisse());
-        navLayout.getChildAt(2).setOnClickListener(v -> showProfil());
+        // TODO: Implement client details screen
+        Toast.makeText(this, (isFournisseur ? "Fournisseur: " : "Client: ") + name, Toast.LENGTH_SHORT).show();
     }
+
 }
 
-private void applyWindowInsets(View view) {
-    if (view == null) return;
-    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-        Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-        v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-        return insets;
-    });
-}
 
-private int dpToPx(int dp) {
-    return (int) (dp * getResources().getDisplayMetrics().density);
-}
-
-private void loadPersons(String table, int containerId, int countTextViewId, String labelPrefix) {
-    LinearLayout container = findViewById(containerId);
-    if (container == null) return;
-    container.removeAllViews();
-    
-    // Get parent ScrollView and empty state container
-    View scrollView = (View) container.getParent();
-    View emptyState = null;
-    if (containerId == R.id.clientsContainer) {
-        emptyState = findViewById(R.id.emptyStateContainer);
-    }
-    
-    android.database.sqlite.SQLiteDatabase db = com.example.konnash.Database.DatabaseHelper.getInstance(this).getReadableDatabase();
-    android.database.Cursor cursor = db.query(table, new String[]{"name", "phone"}, null, null, null, null, "id DESC");
-    
-    int count = 0;
-    while (cursor.moveToNext()) {
-        count++;
-        String name = cursor.getString(0);
-        String phone = cursor.getString(1);
-        
-        LinearLayout itemLayout = new LinearLayout(this);
-        itemLayout.setOrientation(LinearLayout.HORIZONTAL);
-        itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        itemLayout.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
-        itemLayout.setGravity(android.view.Gravity.CENTER_VERTICAL);
-        
-        TextView tvIcon = new TextView(this);
-        tvIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(45), dpToPx(45)));
-        tvIcon.setBackgroundResource(R.drawable.bg_light_blue_btn);
-        tvIcon.setGravity(android.view.Gravity.CENTER);
-        tvIcon.setText(name.length() > 0 ? name.substring(0, 1).toUpperCase() : "U");
-        tvIcon.setTextColor(0xFF333333);
-        tvIcon.setTypeface(null, android.graphics.Typeface.BOLD);
-        
-        LinearLayout centerLayout = new LinearLayout(this);
-        centerLayout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-        params.setMargins(dpToPx(16), 0, 0, 0);
-        centerLayout.setLayoutParams(params);
-        
-        TextView tvName = new TextView(this);
-        tvName.setText(name);
-        tvName.setTextColor(0xFF333333);
-        tvName.setTypeface(null, android.graphics.Typeface.BOLD);
-        
-        TextView tvSubtitle = new TextView(this);
-        tvSubtitle.setText("Aujourd'hui" + (phone.isEmpty() ? "" : " - " + phone));
-        tvSubtitle.setTextSize(12);
-        tvSubtitle.setTextColor(0xFFBDC3C7);
-        
-        centerLayout.addView(tvName);
-        centerLayout.addView(tvSubtitle);
-        
-        LinearLayout rightLayout = new LinearLayout(this);
-        rightLayout.setOrientation(LinearLayout.VERTICAL);
-        rightLayout.setGravity(android.view.Gravity.END);
-        
-        TextView tvAmount = new TextView(this);
-        tvAmount.setText("0.0 DA");
-        tvAmount.setTextColor(0xFFE74C3C);
-        tvAmount.setTypeface(null, android.graphics.Typeface.BOLD);
-        
-        TextView tvGive = new TextView(this);
-        tvGive.setText("J'ai donné");
-        tvGive.setTextSize(10);
-        tvGive.setTextColor(0xFFBDC3C7);
-        
-        rightLayout.addView(tvAmount);
-        rightLayout.addView(tvGive);
-        
-        itemLayout.addView(tvIcon);
-        itemLayout.addView(centerLayout);
-        itemLayout.addView(rightLayout);
-        
-        final String finalName = name;
-        itemLayout.setOnClickListener(v -> showClientDetails(finalName, table.equals("fournisseurs")));
-        
-        container.addView(itemLayout);
-        
-        View separator = new View(this);
-        separator.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dpToPx(1)));
-        separator.setBackgroundColor(0xFFEEEEEE);
-        container.addView(separator);
-    }
-    cursor.close();
-    
-    // Show/hide empty state
-    if (emptyState != null) {
-        if (count == 0) {
-            emptyState.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.GONE);
-        } else {
-            emptyState.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
-        }
-    }
-    
-    TextView tvCount = findViewById(countTextViewId);
-    if (tvCount != null) {
-        tvCount.setText(labelPrefix + " (" + count + ")");
-    }
-}
-
-private void showClientDetails(String name, boolean isFournisseur) {
-    setContentView(R.layout.activity_client_details);
-    applyWindowInsets(findViewById(R.id.main_root)); // Wait, does activity_client_details have main_root? No, we can skip or use a null-safe method.
-    
-    TextView tvClientName = findViewById(R.id.tvClientName);
-    if (tvClientName != null) {
-        tvClientName.setText(name);
-    }
-
-    View btnBack = findViewById(R.id.btnBack);
-    if (btnBack != null) {
-        btnBack.setOnClickListener(v -> showCarnetCredit());
-    }
-
-    // btnTook and btnGave are now static - no click handlers
-}
