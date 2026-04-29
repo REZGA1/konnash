@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Profil Screen
-    Displays a user profile header with invite option and a list of menu items.
-    Updated:
-    - Profile menu icons are tinted blue directly (outlined style).
-    - Bottom navigation icons are grey by default.
-    - Active navigation icon (Profil) is tinted blue and has a blue contour selection indicator.
--->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,14 +14,28 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/profil_title"
-            android:textColor="#3498DB"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profil_title"
+                android:textColor="#3498DB"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvShopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_name"
+                android:textColor="#7F8C8D"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <!-- Invite Friends Section -->
         <LinearLayout
@@ -48,7 +54,6 @@
                 android:textColor="#7F8C8D"
                 android:textSize="12sp" />
 
-            <!-- Share icon with blue contour style -->
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
@@ -133,10 +138,13 @@
 
             <!-- Menu Item: Configuration -->
             <LinearLayout
+                android:id="@+id/btnConfiguration"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
@@ -149,14 +157,81 @@
                     android:layout_weight="1"
                     android:layout_marginStart="16dp"
                     android:text="@string/menu_configuration"
-                    android:textColor="#333333"
+                    android:textColor="#3498DB"
                     android:textSize="18sp"
                     android:textStyle="bold" />
                 <ImageView
+                    android:id="@+id/ivConfigArrow"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_media_play"
-                    app:tint="#3498DB" />
+                    android:src="@android:drawable/ic_menu_more"
+                    app:tint="#3498DB"
+                    android:rotation="90" />
+            </LinearLayout>
+
+            <!-- Dropdown content for Configuration -->
+            <LinearLayout
+                android:id="@+id/layoutConfigDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="60dp">
+
+                <TextView
+                    android:id="@+id/btnMesInformations"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="Mes informations"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:drawableEnd="@android:drawable/ic_media_play"
+                    app:drawableTint="#3498DB" />
+
+                <TextView
+                    android:id="@+id/btnLangue"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="Langue"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:drawableEnd="@android:drawable/ic_media_play"
+                    app:drawableTint="#3498DB" />
+
+                <TextView
+                    android:id="@+id/btnFormatHeure"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="Format d'heure"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:drawableEnd="@android:drawable/ic_media_play"
+                    app:drawableTint="#3498DB" />
+
+                <TextView
+                    android:id="@+id/btnVerrouillage"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="Verrouillage"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:drawableEnd="@android:drawable/ic_media_play"
+                    app:drawableTint="#3498DB" />
+
+                <TextView
+                    android:id="@+id/btnSupprimerOps"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="Supprimer les opérations"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:drawableEnd="@android:drawable/ic_media_play"
+                    app:drawableTint="#3498DB" />
             </LinearLayout>
 
             <!-- Menu Item: Sauvegarde -->
@@ -258,19 +333,16 @@
         android:gravity="center"
         android:paddingTop="8dp">
 
-        <!-- Inactive -->
         <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
             <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/carnet_credit_icon_page" app:tint="#7F8C8D" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_credit" android:textColor="#7F8C8D" android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Inactive -->
         <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
             <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/carnet_caisse_icon_page" app:tint="#7F8C8D" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/nav_carnet_caisse" android:textColor="#7F8C8D" android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Active Page: Profil -->
         <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
             <ImageView
                 android:layout_width="40dp"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/tvClientInitial"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/bg_light_blue_btn"
+        android:gravity="center"
+        android:text="U"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvClientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du Client"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvClientPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000000000"
+            android:textColor="#7F8C8D"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0 DA"
+            android:textColor="#E74C3C"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J'ai donné"
+            android:textColor="#BDC3C7"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</LinearLayout>
