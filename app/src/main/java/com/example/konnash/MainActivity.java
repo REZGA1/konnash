@@ -215,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvAddress = findViewById(R.id.tvAddress);
         View rlAddressDropdown = findViewById(R.id.rlAddressDropdown);
         View btnConfirmer = findViewById(R.id.btnConfirmer);
+        View btnGoToTags = findViewById(R.id.btnGoToTags);
 
         // Restore temporary data
         if (etNom != null) etNom.setText(tempClientName);
@@ -227,6 +228,15 @@ public class MainActivity extends AppCompatActivity {
                 tempClientName = etNom != null ? etNom.getText().toString().trim() : "";
                 tempClientPhone = etPhone != null ? etPhone.getText().toString().trim() : "";
                 showAdresse();
+            });
+        }
+
+        if (btnGoToTags != null) {
+            btnGoToTags.setOnClickListener(v -> {
+                // Save current inputs before navigating
+                tempClientName = etNom != null ? etNom.getText().toString().trim() : "";
+                tempClientPhone = etPhone != null ? etPhone.getText().toString().trim() : "";
+                showGererTags();
             });
         }
 
@@ -278,6 +288,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showGererTags() {
+        setContentView(R.layout.activity_gerer_tags);
+        View btnClose = findViewById(R.id.btnClose);
+        View btnConfirmer = findViewById(R.id.btnConfirmer);
+
+        if (btnClose != null) btnClose.setOnClickListener(v -> showAjouterClient());
+        if (btnConfirmer != null) btnConfirmer.setOnClickListener(v -> showAjouterClient());
+    }
+
     private void loadClientsList() {
         LinearLayout container = findViewById(R.id.clientsContainer);
         TextView tvCount = findViewById(R.id.tvClientsCount);
@@ -318,7 +337,6 @@ public class MainActivity extends AppCompatActivity {
         container.addView(itemView);
         View separator = new View(this);
         separator.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
-        separator.setBackgroundColor(0xFFEEEEEE);
         container.addView(separator);
     }
 

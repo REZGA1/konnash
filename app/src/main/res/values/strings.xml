@@ -33,7 +33,7 @@
     <string name="label_recouvrement">Recouvrement</string>
     <string name="label_rapports">Rapports</string>
     <string name="hint_search">Recherche</string>
-    <string name="label_clients_count">Clients (1)</string>
+    <string name="label_clients_count_format">Clients (%1$d)</string>
     <string name="label_fournisseurs_count">Fournisseurs (0)</string>
     <string name="no_fournisseur_msg">Aucun fournisseur pour\nle moment. Ajoutez des\nfournisseurs</string>
 
