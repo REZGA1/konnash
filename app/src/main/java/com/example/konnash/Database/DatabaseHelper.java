@@ -79,7 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "name TEXT NOT NULL," +
                         "phone TEXT," +
-                        "address TEXT)"
+                        "address TEXT," +
+                        "tag TEXT)" // Added tag column to store the selected tag for the client
         );
 
         // Tags table

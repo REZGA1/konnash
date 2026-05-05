@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String tempClientName = "";
     private String tempClientPhone = "";
     private String tempClientAddress = "";
+    private String tempSelectedTagName = ""; // Stores the name of the selected tag
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -216,11 +217,18 @@ public class MainActivity extends AppCompatActivity {
         View rlAddressDropdown = findViewById(R.id.rlAddressDropdown);
         View btnConfirmer = findViewById(R.id.btnConfirmer);
         View btnGoToTags = findViewById(R.id.btnGoToTags);
+        TextView tvSelectedTag = findViewById(R.id.tvSelectedTag); // Added TextView to show selected tag
 
         // Restore temporary data
         if (etNom != null) etNom.setText(tempClientName);
         if (etPhone != null) etPhone.setText(tempClientPhone);
         if (tvAddress != null && !tempClientAddress.isEmpty()) tvAddress.setText(tempClientAddress);
+        
+        // Update the selected tag text if one was chosen
+        if (tvSelectedTag != null && !tempSelectedTagName.isEmpty()) {
+            tvSelectedTag.setText(tempSelectedTagName);
+            tvSelectedTag.setTextColor(android.graphics.Color.parseColor("#3498DB")); // Set color to indicate selection
+        }
 
         if (rlAddressDropdown != null) {
             rlAddressDropdown.setOnClickListener(v -> {
@@ -256,12 +264,14 @@ public class MainActivity extends AppCompatActivity {
                 values.put("name", name);
                 values.put("phone", phone);
                 values.put("address", address);
+                values.put("tag", tempSelectedTagName); // --- Save the selected tag in the database ---
                 db.insert("clients", null, values);
 
                 // Reset temp data
                 tempClientName = "";
                 tempClientPhone = "";
                 tempClientAddress = "";
+                tempSelectedTagName = ""; // Clear selected tag after saving
 
                 showCarnetCredit();
             });
@@ -288,13 +298,161 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Shows the 'Gerer Tags' (Manage Tags) screen.
+     * This screen allows users to see existing tags and navigate to create a new one.
+     */
     private void showGererTags() {
         setContentView(R.layout.activity_gerer_tags);
         View btnClose = findViewById(R.id.btnClose);
         View btnConfirmer = findViewById(R.id.btnConfirmer);
+        View btnNewTag = findViewById(R.id.btnNewTag); // Button to add a new tag
 
+        // Back to 'Ajouter Client' screen
         if (btnClose != null) btnClose.setOnClickListener(v -> showAjouterClient());
+        
+        // Confirm and return to 'Ajouter Client'
         if (btnConfirmer != null) btnConfirmer.setOnClickListener(v -> showAjouterClient());
+
+        // Navigate to 'Nouveau Tag' screen
+        if (btnNewTag != null) {
+            btnNewTag.setOnClickListener(v -> showNouveauTag());
+        }
+
+        // Load and display existing tags from the database
+        loadTagsList();
+    }
+
+    /**
+     * Shows the 'Nouveau Tag' screen to create a new tag.
+     */
+    private void showNouveauTag() {
+        setContentView(R.layout.activity_nouveau_tag);
+        
+        View btnClose = findViewById(R.id.btnClose);
+        EditText etTagName = findViewById(R.id.etTagName);
+        View btnConfirmer = findViewById(R.id.btnConfirmer);
+        View btnColorPicker = findViewById(R.id.btnColorPicker);
+
+        // Close and return to 'Gerer Tags'
+        if (btnClose != null) btnClose.setOnClickListener(v -> showGererTags());
+
+        // Logic for the Confirm button
+        if (btnConfirmer != null) {
+            btnConfirmer.setOnClickListener(v -> {
+                String tagName = etTagName != null ? etTagName.getText().toString().trim() : "";
+
+                // Validation: Tag name must not be empty
+                if (tagName.isEmpty()) {
+                    Toast.makeText(this, "Veuillez entrer le nom du tag", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Register the tag in the database
+                SQLiteDatabase db = DatabaseHelper.getInstance(this).getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("name", tagName);
+                values.put("color", "#3498DB"); // Default color for now
+
+                long result = db.insert("tags", null, values);
+
+                if (result != -1) {
+                    Toast.makeText(this, "Tag enregistré avec succès", Toast.LENGTH_SHORT).show();
+                    showGererTags(); // Return to the tags management screen
+                } else {
+                    // This might happen if the tag name already exists (UNIQUE constraint)
+                    Toast.makeText(this, "Ce tag existe déjà", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    /**
+     * Loads tags from the database and displays them in the tagsContainer.
+     */
+    private void loadTagsList() {
+        LinearLayout container = findViewById(R.id.tagsContainer);
+        View emptyState = findViewById(R.id.emptyState);
+
+        if (container == null) return;
+        
+        // Keep only the emptyState if it's there, or clear everything
+        container.removeAllViews();
+        if (emptyState != null) container.addView(emptyState);
+
+        SQLiteDatabase db = DatabaseHelper.getInstance(this).getReadableDatabase();
+        Cursor cursor = db.query("tags", null, null, null, null, null, "id DESC");
+
+        if (cursor.getCount() > 0) {
+            // Hide empty state if there are tags
+            if (emptyState != null) emptyState.setVisibility(View.GONE);
+
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String colorStr = cursor.getString(cursor.getColumnIndexOrThrow("color"));
+                
+                // Create a simple view for the tag item
+                addTagItem(container, name, colorStr);
+            }
+        } else {
+            // Show empty state if no tags
+            if (emptyState != null) emptyState.setVisibility(View.VISIBLE);
+        }
+        cursor.close();
+    }
+
+    /**
+     * Helper to add a tag item UI to the container using item_tag.xml layout.
+     * Each tag item is clickable to select it, and has a delete button.
+     */
+    private void addTagItem(LinearLayout container, String name, String colorStr) {
+        View tagView = getLayoutInflater().inflate(R.layout.item_tag, container, false);
+        
+        TextView tvName = tagView.findViewById(R.id.tvTagName);
+        ImageView ivCheck = tagView.findViewById(R.id.ivCheckmark);
+        ImageView btnDelete = tagView.findViewById(R.id.btnDeleteTag);
+
+        if (tvName != null) tvName.setText(name);
+
+        // Show checkmark if this tag is currently selected
+        if (ivCheck != null) {
+            if (name.equals(tempSelectedTagName)) {
+                ivCheck.setVisibility(View.VISIBLE);
+            } else {
+                ivCheck.setVisibility(View.GONE);
+            }
+        }
+
+        // Selection logic: Click on the tag area (except delete button)
+        tagView.setOnClickListener(v -> {
+            tempSelectedTagName = name;
+            showAjouterClient();
+        });
+
+        // Delete logic
+        if (btnDelete != null) {
+            btnDelete.setOnClickListener(v -> {
+                SQLiteDatabase db = DatabaseHelper.getInstance(this).getWritableDatabase();
+                int deletedRows = db.delete("tags", "name = ?", new String[]{name});
+
+                if (deletedRows > 0) {
+                    Toast.makeText(this, "Tag supprimé", Toast.LENGTH_SHORT).show();
+                    if (name.equals(tempSelectedTagName)) {
+                        tempSelectedTagName = "";
+                    }
+                    loadTagsList(); // Refresh the UI
+                }
+            });
+        }
+
+        // Add divider manually or rely on container? 
+        // The previous implementation added a divider View. Let's keep consistency.
+        container.addView(tagView);
+        
+        View divider = new View(this);
+        divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
+        divider.setBackgroundColor(android.graphics.Color.LTGRAY);
+        container.addView(divider);
     }
 
     private void loadClientsList() {
@@ -318,21 +476,32 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
-                addClientItem(container, name, phone);
+                String tag = cursor.getString(cursor.getColumnIndexOrThrow("tag"));
+                addClientItem(container, name, phone, tag);
             }
         }
         cursor.close();
     }
 
-    private void addClientItem(LinearLayout container, String name, String phone) {
+    private void addClientItem(LinearLayout container, String name, String phone, String tag) {
         View itemView = getLayoutInflater().inflate(R.layout.item_client, container, false);
         TextView tvName = itemView.findViewById(R.id.tvClientName);
         TextView tvPhone = itemView.findViewById(R.id.tvClientPhone);
         TextView tvInitial = itemView.findViewById(R.id.tvClientInitial);
+        TextView tvTag = itemView.findViewById(R.id.tvClientTag);
 
         if (tvName != null) tvName.setText(name);
         if (tvPhone != null) tvPhone.setText(phone.isEmpty() ? "" : phone);
         if (tvInitial != null && !name.isEmpty()) tvInitial.setText(name.substring(0, 1).toUpperCase());
+        
+        if (tvTag != null) {
+            if (tag != null && !tag.isEmpty()) {
+                tvTag.setText(tag);
+                tvTag.setVisibility(View.VISIBLE);
+            } else {
+                tvTag.setVisibility(View.GONE);
+            }
+        }
 
         container.addView(itemView);
         View separator = new View(this);
